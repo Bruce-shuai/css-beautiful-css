@@ -1,0 +1,52 @@
+body {
+  background-color: #000;
+  margin: 0;
+
+  /* height: 300vh; */
+  display: flex;
+  /* 定义项目在主轴上的对齐方式 */
+  justify-content: center;
+  /* 定义项目在交叉轴（默认方向从上到下）上的对齐方式 */
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* .sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: ;
+} */
+
+h1 {
+  /* 这个字体很苹果啊~ */
+  font-family: Helvetica;
+  margin: 0;
+  padding: 0;
+  font-size: 48px;
+  color: #fff;
+  /* 这个属性没见过  字与字之间的距离 */
+  letter-spacing: -0.3px;
+
+  /* 设定一个渐层颜色的背景 */
+  background-color: linear-gradient(
+    75deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 33.33%,
+    rgba(255, 255, 255, 0) 66.67%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  background-size: 300% 100%;
+  background-position-x: 100%;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+  transition: 2s background-position-x ease-in-out;
+}
+
+h1:hover {
+  background-position-x: 0%;
+}

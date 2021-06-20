@@ -1,0 +1,66 @@
+div {
+  height: 100px;
+  width: 100px;
+  background-color: #000;
+}
+
+/* 这个搭配是真的有效 */
+input:checked + label div {
+  /* 透明色 */
+  background-color: transparent;
+}
+
+#cb {
+  display: none;
+}
+
+/* -------------------------- */
+
+/* 尽量减少*{ } 的使用，性能优化！*/
+body {
+  padding: 0;
+  margin: 0;
+}
+
+header {
+  height: 44px;
+  background-color: #000;
+}
+
+.hamburger-container {
+  width: 20px;
+  height: 20px;
+  /* background-color: #fff; */
+  position: relative;
+  top: 18px;
+  left: 20px;
+}
+
+.hamburger-container span {
+  height: 1px;
+  top: 0;
+  position: relative;
+  display: block;
+  transform: rotate(0deg);
+  background-color: #fff;
+  transition: top 0.3s ease-in-out 0.3s, transform 0.3s ease-in-out;
+}
+
+.hamburger-container span:nth-child(2) {
+  /* 思考一下，为什么这里用的是margin-top而不是top */
+  /* 如果设置的是top，则第二个span top: -4 是在span的父元素的基础上的坐标变化*/
+  margin-top: 7px;
+}
+
+input:checked + label .hamburger-container span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 4px;
+  /* 最后.3s的延迟效果用起来很舒服啊~ */
+  transition: transform 0.3s ease-in-out 0.3s, top 0.3s ease-in-out;
+}
+
+input:checked + label .hamburger-container span:nth-child(2) {
+  transform: rotate(-45deg);
+  top: -4px;
+  transition: transform 0.3s ease-in-out 0.3s, top 0.3s ease-in-out;
+}

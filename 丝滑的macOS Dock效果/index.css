@@ -1,0 +1,78 @@
+html {
+  /* 这个可以控制 表情包的大小 */
+  font-size: 8px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  /* vh 这个东西要更尽一步的了解 */
+  min-height: 100vh;
+  /* 这里的妙用是啥呢？ */
+  overflow: hidden;
+  /* 这个颜色过渡可以学学 */
+  background-image: linear-gradient(
+    109.6deg,
+    rgba(25, 170, 209, 1) 11.3%,
+    rgba(21, 65, 249, 1) 69.9%
+  );
+}
+
+.glass {
+  /* 为什么这里要用100% */
+  width: 100%;
+  /* rem的效果是什么？ */
+  height: 8rem;
+  /* rgba  0.25的效果是什么？ */
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  /* filter是个啥东西？ */
+  backdrop-filter: blur(4px);
+  /* -webkit-的效果是什么？ */
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  justify-content: center;
+}
+
+.dock {
+  /* css 变量如何命名 */
+  --scale: 1;
+  list-style: none;
+
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dock li {
+  font-size: calc(6rem * var(--scale));
+  padding: 0 0.5rem;
+
+  /* 箭头符号 */
+  cursor: default;
+
+  position: relative;
+  top: calc((6rem * var(--scale) - 6rem) / 2 * -1);
+
+  transition: 15ms all ease-out;
+}
+
+.dock li.loading {
+  animation: 1s loading ease-in infinite;
+}
+
+@keyframes loading {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  60% {
+    transform: translateY(-40px);
+  }
+}

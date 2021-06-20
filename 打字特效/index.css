@@ -1,0 +1,36 @@
+:root {
+  font-size: 20px;
+}
+
+body {
+  /* 这里使用了flex 让内容左右居中 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* 总感觉这个overflow: hidden
+  * 有了overflow后页面是没有滑动效果的
+  */
+}
+
+h1 {
+  font-size: 4rem;
+  margin: 0;
+  padding: 0;
+  /* 这是等宽字体 */
+  font-family: monospace;
+  /* 新知识 CSS3的单位 ch */
+  width: 6ch;
+  overflow: hidden;
+  /* 秀儿 */
+  animation: 3s typing steps(13, jump-none) forwards;
+}
+
+@keyframes typing {
+  from {
+    width: 1ch;
+  }
+  to {
+    width: 13ch;
+  }
+}
