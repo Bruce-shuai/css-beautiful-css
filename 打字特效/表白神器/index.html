@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>点开有惊喜</title>
+  <style>
+    :root {
+      font-size: 20px;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* 原来body 不是一来就占了全屏，这里的min-height 让body占满了全屏 */
+      min-height: 100vh;
+    }
+    h1 {
+      position: relative;
+      /* 这让每一个字母的左右宽度保持一致了 */
+      font-size: 3rem;
+      font-family: monospace;
+    }
+    h1 span {
+      /* 定义一个CSS变量 */
+      --delay: 10s;
+      
+      /* ------------------- */
+      display: inline-block;
+      overflow: hidden;
+      width: 0ch;
+      /* ------------------- */
+      animation: .2s text-in ease-in-out forwards;
+      animation-delay: var(--delay);
+    }
+    @keyframes text-in {
+      from {
+        width: 0ch;
+      }
+      to {
+        width: 1ch;
+      }
+    }
+    h1::after {
+      content: '';
+      /* ::after 默认是行内元素 */
+      display: inline-block;
+      /* 它的父类竟然是h1 */
+      position: absolute;
+      width: 10px;
+      height: 3rem;
+      right: -20px;
+      border-radius: 2px;
+      background-color: #000;
+    }
+    h1.ended::after {
+      animation: 1s cursor steps(2, jump-none) infinite;
+    }
+    @keyframes cursor {
+      from {
+        /* 这个用得好啊 */
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>lgismyson</h1>
+
+  <script>
+    const h1 = document.querySelector('h1');    
+    h1.innerHTML = h1.textContent.replace(/\S/g, "<span>$&</span>")
+    
+    let delay = 0;
+    document.querySelectorAll('span').forEach((span, index) => {
+      delay += 0.2;
+
+      if (index === 2 || index === 4 || index === 6) {
+        delay += 0.3;
+      }
+      // 牛逼，还可以带单位
+      span.style.setProperty('--delay', `${delay}s`)
+    })
+    
+    h1.addEventListener('animationend', e => {
+      if (e.target === document.querySelector('h1 span:last-child')) {
+        h1.classList.add('ended');
+      }
+    })
+  </script>
+</body>
+</html>

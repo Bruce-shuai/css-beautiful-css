@@ -8,29 +8,81 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  /* 总感觉这个overflow: hidden
-  * 有了overflow后页面是没有滑动效果的
-  */
 }
 
 h1 {
+  /* 4rem 即  4 * 20px */
   font-size: 4rem;
   margin: 0;
   padding: 0;
   /* 这是等宽字体 */
   font-family: monospace;
   /* 新知识 CSS3的单位 ch */
-  width: 6ch;
+  /* width: 6ch;
   overflow: hidden;
-  /* 秀儿 */
-  animation: 3s typing steps(13, jump-none) forwards;
+  animation: 3s typing steps(13, jump-none) forwards; */
+
+  position: relative;
 }
 
-@keyframes typing {
+/* @keyframes typing {
   from {
     width: 1ch;
   }
   to {
     width: 13ch;
+  }
+} */
+
+/* 这应该是相当于在h1的最后写一根竖线，只不过h1在不断增加？ */
+h1::after {
+  /* 这里为什么要写成content=''呢？ */
+  content: "";
+  /* 这里弄个行内块是有什么用呢？ */
+  display: inline-block;
+  position: absolute;
+
+  width: 12px;
+  height: 4rem;
+  background-color: #000;
+  border-radius: 2px;
+  /* 这里的-30px是故意让竖线右移一点 */
+  right: -30px;
+  /* animation: 0.1s cursor steps(2, jump-none) infinite; */
+}
+
+/* 这个h1.ended::after 是一个什么用法呢？ 这是为了保证打字的时候游标不闪烁，打完字后才闪烁，硬记这个效果 */
+h1.ended::after {
+  /* steps(2, jump-none)是为了达到两个影格的效果，而不是要渐出渐显的过渡效果 */
+  animation: 1.1s cursor steps(2, jump-none) infinite;
+}
+
+@keyframes cursor {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+h1 span {
+  --delay: 10s;
+  /* 让span达到横向排列也有宽高的效果 */
+  display: inline-block;
+  overflow: hidden;
+  width: 0ch;
+  animation: 0.1s text-in ease-in-out forwards;
+  /* 每一个span都有一个字母，但都是延迟出现 */
+  animation-delay: var(--delay);
+}
+
+/* 这里的命名都是 -  而不是_或驼峰 */
+@keyframes text-in {
+  from {
+    width: 0ch;
+  }
+  to {
+    width: 1ch;
   }
 }
