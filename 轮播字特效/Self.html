@@ -4,70 +4,60 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>自己来弄一个轮播字体</title>
   <style>
     :root {
-      /* 这个--offset 用得也感觉挺好的啊 */
+      /* font-size: 24px; */
       --offset: 6px;
     }
-
     body {
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
     }
-
     h2 {
       width: 980px;
       font-size: 100px;
       font-family: Helvetica;
-      /* 行间距 */
       line-height: 1.06;
-      /* 这个可以研究研究 */
       letter-spacing: -0.02em;
-      /* 这个黑色感觉好像还不错 */
       color: #1d1d1f;
     }
-
     .mask {
       height: 106px;
-      /* 这个relative在这里是起了大用 */
-      position: relative;
       overflow: hidden;
+      /* 没有这个属性的话，字体会跳出框外 */
+      position: relative;
       margin-top: var(--offset);
+      /* margin-top: var(--offset); */
     }
 
     .mask span {
       display: block;
-      box-sizing: border-box;
-      position: absolute;
-      top: 100px;
-      padding-bottom: var(--offset);
 
-      /* 上下、左右都撑到了最大 */
-      background-size: 100% 100%;
-      /* 这个clip 用得妙啊~ */
+      padding-bottom: 6px;
+
+      /* 这个absolute是真的神 */
+      position: absolute;
+      top: 90px;
+
+      /* 默认是怪异盒模型？还是标准盒模型？ 是标准盒模型 */
+      margin: 8px;
+      /* 下面这三个属性值得好好研究研究 */
       -webkit-background-clip: text;
       background-clip: text;
-      /* 这个感觉有点厉害啊 */
       -webkit-text-fill-color: transparent;
-      background-repeat: no-repeat;
     }
-
-    /* 这个span[data-show]的操作感觉挺秀的啊 */
     .mask span[data-show] {
-      /* translateY Y轴移动 */
       transform: translateY(-100%);
-      transition: .5s transform ease-in-out;
+      transition: 1s transform ease-in-out;
     }
-
     .mask span[data-up] {
       transform: translateY(-200%);
-      transition: .5s transform ease-in-out;
+      transition: 1s transform ease-in-out;
     }
 
-    /* 艹,这个颜色用得是真的好看 */
     .mask span:nth-child(1) {
       background-image: linear-gradient(45deg, #0ecffe 50%, #07a6f1);
     }
@@ -89,7 +79,6 @@
   <h2>
     Turn your living room into
     <div class="mask">
-      <!-- data-show 是自己定义的属性名？ -->
       <span data-show>a theater.</span>
       <span>a gym.</span>
       <span>a concert hall.</span>
@@ -97,14 +86,23 @@
     </div>
   </h2>
   <script>
-    // Element.removeAttribute()从指定的元素中删除一个属性
-    // nextElementSibling 返回下一个列表选项的HTML的内容
-    // setInterval 是不断重复调用回调函数
+    // setInterval(() => {
+    //   const show = document.querySelector('span[data-show]');
+    //   const next = show.nextElementSibling || document.querySelector('span:first-child');
+    //   const up = show;
+
+    //   show.removeAttribute('span[data-show]');
+    //   show.setAttribute('span[data-up]', '')
+
+    //   next.setAttribute('span[data-show]')
+      
+    // }, 2000)
+
     setInterval(function () {
       const show = document.querySelector('span[data-show]')
       const next = show.nextElementSibling || document.querySelector('span:first-child')
-      const up = document.querySelector('span[data-up]')
-  
+      const up = document.querySelector('span[data-up]')   // 第一次的up 是 null
+
       if (up) {
         up.removeAttribute('data-up')
       }
