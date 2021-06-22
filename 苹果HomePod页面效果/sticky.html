@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: Helvetica;
+      text-align: center;
+    }
+    .sticky-container {
+      background-color: #ccc;
+      padding: 20px;
+      margin: 20px;
+    }
+
+    .sticky-header {
+      background-color: #999;
+      padding: 20px;
+      position: sticky;
+      top: 0;
+    }
+
+    .long-content {
+      height: 300vh;
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- 当包住sticky-header的容器消失了，sticky的效果也就消失了 -->
+  <div class="sticky-container">
+    STICKY CONTAINER
+    <div class='sticky-header'>STICKY HEADER</div>
+    <div class="long-content"></div>
+  </div>
+  <div class="sticky-container">
+    STICKY CONTAINER(2)
+    <div class="sticky-header">STICKY HEADER(2)</div>
+    <div class="long-content"></div>
+  </div>
+  <script>
+
+  </script>
+</body>
+</html>
