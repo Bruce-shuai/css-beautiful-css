@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .imac img {
+      display: block;
+      position: relative;
+      /* 图片居中 */
+      /* 下面的三步操作要好好研究研究 */
+      top: 50%;
+      left: 50%;
+      transform: translate(calc(-50% - 30px), 0);
+    }
+
+    h2 {
+      font-size: 72px;
+      font-family: Helvetica;
+      letter-spacing: -.012em;
+      width: 290px;
+      /* 下面这个是平常的粗度 */
+      font-weight: normal;
+
+      position: relative;
+      left: 50%;
+      position: sticky;
+      top: -1px;
+      margin: 100px 0;
+      padding: 0;
+      /* z-index: 0;  说明文字默认会被图片覆盖的 */
+    }
+  </style>
+</head>
+<body>
+  <div class="imac">
+    <h2>Only 11.5mm. Now that's thin.</h2>
+    <div class="image">
+      <img src="https://www.apple.com/105/media/us/imac-24/2021/5e004d75-3ad6-4bb9-ab59-41f891fc52f0/anim/design-hero/large/flow/flow_startframe.jpg" alt="">
+    </div>
+  </div>
+
+  <script>
+    const h2 = document.querySelector('h2');
+
+    // [e] 代表数组中的第一个 
+    const observer = new IntersectionObserver(([e]) => {
+
+    }, { threshold: [1] })
+  </script>
+</body>
+</html>

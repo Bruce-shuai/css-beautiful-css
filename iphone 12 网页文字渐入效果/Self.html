@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文字渐入效果</title>
+</head>
+<style>
+  :root {
+    --percent: 100%
+  }
+  body {
+    /* 这一招说真的挺厉害的 */
+    min-height: 300vh;
+    background-color: #000;
+  }
+  /* 这一大坨是不会被划上去的 */
+  .sticky {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-size: 48px;
+    font-family: helvetica;
+    letter-spacing: -0.03px;
+    /* color: #fff; */
+    /* 为了搭配 linear-gradient color 的颜色变成 transparent最好 */
+    color: transparent;
+    margin: 0;
+    padding: 0;
+
+    background-image: linear-gradient( 75deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 33.33%,
+      rgba(255, 255, 255, 0) 66.7%,
+      rgba(255, 255, 255, 0) 100%
+    );
+
+    /* 这个只会对字体边框有效果？ */
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    background-size: 300% 100%;
+    background-position-x: calc(100% - var(--percent));
+
+    /* transition: 2s background-position-x ease-in-out; */
+  }
+
+  /* h1:hover {
+    background-position-x: 0%;
+  } */
+
+</style>
+<body>
+  <div class="sticky">
+    <h1>Less bezel, more screen</h1>
+  </div>
+
+  <script>
+    const h1 = document.querySelector('h1');
+    document.addEventListener('scroll', e => {
+      let scrolled = document.documentElement.scrollTop /
+        (document.documentElement.scrollHeight - document.documentElement.clientHeight)
+      
+      // scrollTop: 是距离内容开始的长度
+      // console.log('scrollTop', document.documentElement.scrollTop);
+      // scrollHeight: 是所有内容的高度
+      // console.log('scrollHeight', document.documentElement.scrollHeight);
+      // 是当前视图的高度
+      // console.log('clientHeight', document.documentElement.clientHeight);
+    
+      // 为什么在h1 里取--percent呢？
+      h1.style.setProperty('--percent', `${scrolled * 100}%`)
+    })
+  </script>
+</body>
+</html>
