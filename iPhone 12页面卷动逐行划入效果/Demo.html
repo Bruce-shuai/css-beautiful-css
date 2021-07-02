@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    :root {
+      /* 感觉在:root这儿写变量是非常频繁的呀 */
+      --device-width: 770px;
+      --device-height: 1336px;
+      --ui-width: 640px;
+      font-size: 15px;
+    }
+
+    body {
+      background-color: #000;
+      margin: 0;
+      /* flex 和 position相互混用有什么影响没哦？ */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      /* 又是全屏效果 */
+      min-height: 100vh;
+      font-family: Helvetica;
+      padding: 4rem 0;
+    }
+
+    h2 {
+      color: #6e6e73;
+      text-align: center;
+      /* 说明了rem 也是可以使用小数的 */
+      font-size: 4.5rem;
+      font-weight: 600;
+      margin: 6rem 0;
+    }
+
+    h2 p {
+      margin: 0;
+      color: #fff;
+    }
+    #iphone {
+      position: relative;
+      width: var(--device-width);
+      height: var(--device-height);
+    }
+
+    #hardware {
+      width: 100%;
+      height: 100%;
+      /* 一般就通过background-image来实现图片背景 */
+      background-image: url(https://assets.codepen.io/2002878/iphone12-5g_on_phone.jpg);
+      /* 这里的background-size 的用法的确非常有讲究啊 */
+      background-size: var(--device-width) var(--device-height);
+
+      /* 遮罩图片套用 这个要去查查如何用 牛啊，这个遮罩效果*/
+      mask-image: url(https://assets.codepen.io/2002878/iphone12-5g_on_phone_mask.png);
+      -webkit-mask-image: url(https://assets.codepen.io/2002878/iphone12-5g_on_phone_mask.png);
+      mask-size: var(--device-width) var(--device-height);
+      -webkit-mask-size: var(--device-width) var(--device-height);
+    }
+
+    #ui {
+      position: absolute;
+      top: 0;
+      /* 整个列表处于左右居中(没有上下) */
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #ui .top-ui {
+      display: block;
+      width: var(--ui-width);
+      /* 这里使用auto的目的是什么呢？ 位置居中好像是*/
+      height: auto;
+      margin: 70px auto 0;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #222;
+    }
+
+    #ui ul {
+      /* 取消列表的样式 */
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      --process: 0;
+    }
+
+    #ui ul li img {
+      display: block;
+      width: var(--ui-width);
+      height: auto;
+      margin: 10px auto;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #222;
+
+      /* 这个和transform搭配就有点厉害了 */
+      /* transition: .25s transform ease-in-out; */
+      transform: scale(calc(1.8 - (0.8 * var(--progress)))) translateY(calc(-60px * (1 - var(--progress))));
+      opacity: var(--progress);
+    }
+
+
+    /* 用css实现 滑动图片效果 */
+    /* #ui ul li img:hover {
+      transform: scale(1.8) translateY(-60px);
+      opacity: 0;
+    } */
+  </style>
+
+</head>
+<body>
+  <h2>
+    Superfast wireless
+    <!-- 这里的副标题用p来实现 -->
+    <p>Hello 5G</p>
+  </h2>
+
+  <div id="iphone">
+    <!-- hardware 会用来显示iPhone的机身和边框 -->
+    <div id="hardware"></div>
+    <!-- ui 则会显示画面里面的内容 -->
+    <div id="ui">
+      <!-- 屏幕顶部信息 -->
+      <!-- 针对img 设置class -->
+      <img src="https://assets.codepen.io/2002878/iphone12-5g_top_ui.jpg" class="top-ui" alt="">
+      <!-- 每一行资料的图片 -->
+      <ul>
+        <!-- 这里的process 是自定义的变量 -->
+        <li>
+          <img src="https://assets.codepen.io/2002878/iphone12-5g_show_01.jpg" />
+        </li>
+        <li>
+          <img src="https://assets.codepen.io/2002878/iphone12-5g_show_02.jpg" />
+        </li>
+        <li>
+          <img src="https://assets.codepen.io/2002878/iphone12-5g_show_03.jpg" />
+        </li>
+        <li>
+          <img src="https://assets.codepen.io/2002878/iphone12-5g_show_04.jpg" />
+        </li>
+        <li>
+          <img src="https://assets.codepen.io/2002878/iphone12-5g_show_05.jpg" />
+        </li>
+        <li>
+          <img src="https://assets.codepen.io/2002878/iphone12-5g_show_06.jpg" />
+        </li>
+        <li>
+          <img src="https://assets.codepen.io/2002878/iphone12-5g_show_07.jpg" />
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+<script>
+  const rows = document.querySelectorAll('#ui ul li');
+  // 这里的documentElement 有讲究
+  const html = document.documentElement;
+
+  document.addEventListener('scroll', e => {
+    // 又是这个计算公式
+    let scrolled = html.scrollTop / (html.scrollHeight - html.clientHeight)
+    // console.log(scrolled);
+
+    let total = 1 / rows.length;   // 这个是真的优点秀啊
+
+    // 这里的for of 使用有点秀   entries() 方法是啥呢？
+    for (let [index, row] of rows.entries()) {
+      let start = total * index;
+      let end = total * (index + 1);
+
+      let progress = (scrolled - start) / (end - start);
+      if (progress >= 1) progress = 1;
+      if (progress <= 0) progress = 0;
+
+      row.style.setProperty('--progress', progress);
+    }
+  })
+</script>
+</html>

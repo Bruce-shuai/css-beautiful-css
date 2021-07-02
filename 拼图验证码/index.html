@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    #captcha {
+      --width: 400px;
+      --height: 260px;
+
+      display: block;
+      width: var(--width);
+      height: var(--height);
+      background-image: url(https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2700&q=80);
+      /* 填满容器 background-size: cover? */
+      /* 这个cover的内容要好好研究研究 */
+      background-size: cover;
+      /* 这一步的目的是什么呢？ */
+      background-position: center;
+      position: relative;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, .3);
+    }
+
+    #captcha::before, #captcha::after {
+      position: absolute;
+      content: '';
+    }
+  </style>
+</head>
+<body>
+  <div id="captcha"></div>
+</body>
+</html>
