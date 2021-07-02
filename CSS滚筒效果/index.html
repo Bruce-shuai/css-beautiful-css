@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .roller {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      /* background-color: #eee; */
+      /* 牛逼， overflow 加上 超长的 体积 */
+      overflow: auto;
+
+      /* 这个属性牛逼啊 */
+      scroll-snap-type: y mandatory;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: Helvetica;
+      font-size: 15px;
+    }
+
+    .roller li {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #333;
+      /* 妙啊！这个效果  好细节 */
+      scroll-snap-align: start;
+    }
+
+    .roller-wrapper {
+      width: 400px;
+      height: 300px;
+      position: relative;
+      /* 这个颜色过渡 巧妙啊 to bottom 是指的渐层方向是向下的 */
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, .3) 0%, rgba(0, 0, 0, .0) 25%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, .3) 100%);
+      box-shadow: inset 0px 0px 12px rgba(0, 0, 0, .2);
+      border-radius: 12px;
+    }
+
+    /* ::after是伪元素还是伪类呢，感觉像一个伪元素 对，就是因为是伪元素才有这些效果 */
+    .roller-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 120px;
+      width: 100%;
+      height: 60px;
+      /* background-color: #eee; */
+      /* 我艹，这两个50% 搭配出来  为什么这么好 */
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, .1) 0%, rgba(0, 0, 0, .2) 50%, rgba(0, 0, 0, .25) 50%, rgba(0, 0, 0, .1) 100%);
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, .12);
+      border-top: 1px solid rgba(0, 0, 0, .12);
+      border-bottom: 1px solid rgba(0, 0, 0, .12);
+      /* 这个 pointer-events: none 感觉有点牛逼呀 */
+      pointer-events: none;    
+    }
+
+    .roller li:last-child {
+      margin-bottom: 120px;
+    }
+  </style>
+</head>
+<body>
+  <div class="roller-wrapper">
+    <!-- 这里不是用的ul来包裹，而是用的div来包裹 -->
+    <ul class="roller">
+      <!-- 写这两个空li的妙处要知道 -->
+      <li></li>
+      <li></li>
+      <li>iPhone 12 Pro</li>
+      <li>iPhone 12</li>
+      <li>iPhone 12 mini</li>
+      <li>iPhone SE</li>
+      <li>iPhone 11</li>
+      <li>iPhone XR</li>
+      <li>iPhone XS</li>
+      <li>iPhone X</li>
+    </ul>
+  </div>
+  
+</body>
+</html>
