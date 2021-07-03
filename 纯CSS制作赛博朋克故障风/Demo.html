@@ -4,77 +4,82 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>赛博朋克故障风</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Tourney:wght@200;900&display=swap" rel="stylesheet">
   <style>
     body {
-      /* ----------基本上这都是套路了--------- */
-      /* flex让上下左右居中 */
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       background-color: #F8F005;
+      overflow: hidden;
     }
-
     button, button::after {
-      /* button 是可以被调节大小的 */
       width: 380px;
       height: 86px;
+ 
       font-size: 36px;
-      /* 可以在Google Fonts找恰当的字体 */
-      font-family: 'Oswald', sans-serif;
+      font-family: 'Anton', sans-serif;
+      /* font-family: 'Tourney', cursive; */
 
-      /* 将左下角变为斜角 这招牛逼(通过linear-gradient设定背景图片) */
-      background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
-      /* 这里的border 边框设置为0是很巧妙的 */
+      /* 清除按钮边框 */
       border: 0;
-      color: #fff;
-      letter-spacing: 3px; 
-      line-height: 88px;
-      /* box-shadow 要好好研究研究 */
-      box-shadow: 6px 0px 0px #00E6F6;
+
+      /* 将左下角变为斜角 */
+      /* 含义是 45° 透明到5%位置结束  red从5%这里开始  
+         百分比相等在这里就相当于一根色彩分割线，没有过渡效果 */
+      background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
+      color: #eee;
+
+      line-height: 86px;
+      letter-spacing: 3px;
+      /* box-shadow x, y [, virtual][, color]  virtual 是虚化程度(单位px)*/
+      box-shadow: 8px 0px #00E6F6;
 
       /* 这样当点击按钮的时候，就不会有浏览器预设的按钮边框了 */
-      outline: transparent;  
-      position: relative; 
+      outline: transparent;
+      position: relative;
     }
 
-    /* 其实就把这个伪元素想成一个元素就行 */
+    /* 注意，伪元素 默认是 inline */
+    /* 现在在最上层的是伪元素after而不是button */
     button::after {
+      /* -------CSS变量的作用域是怎样的？------- */
       --slice-0: inset(50% 50% 50% 50%);
       --slice-1: inset(80% -6px 0 0);
       --slice-2: inset(50% -6px 30% 0);
       --slice-3: inset(10% -6px 85% 0);
       --slice-4: inset(40% -6px 43% 0);
       --slice-5: inset(80% -6px 5% 0);
-
+      
       content: 'AVAILABLE NOW';
-      /* 这里把display设置为block的意思是什么呢？ */
+      /* 感觉这个block写不写其实都无所谓 */
       display: block;
-      /* 这样又可以达到文本重合的效果了 */
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      /* background: #000; */
-      /* 这个用法要好好研究研究 */
+      /* z-index: -2; */
       background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #FF013C 3%);
-      /* 阴影： 左边加一个黄色，右边加一个蓝色 这个文本阴影可以呀！ */
-      text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
 
-      /* clip-path的用法要好好研究研究 */
+      /* text-shadow 这个挺有意思的 */
+      /* 其实用法和box-shadow 是一样的 */
+      text-shadow: -3px -3px #F8F005, 3px 3px 0px #00E6F6;
+
+      /* 对::after进行切片处理 */
+      /* clip-path CSS 属性使用裁剪方式创建元素的可显示区域。区域内的部分显示，区域外的隐藏。 */
+      /* 从上、右、下和左边缘剪裁位置 */
+
+      /* 这里用--slice-0 */
       clip-path: var(--slice-0);
-      /* transform: translate(-20px, 10px);  */
     }
 
-    /* 注意 伪类和伪元素先后放置的顺序 */
+    /* 这个用法挺妙的 */
     button:hover::after {
-      animation: 1s glitch;
-      /* 这个的用法应该要好好看看才行 数字越小就越卡顿 */
+      animation: 1.5s glitch;
+      /* 这个的用法是：分割成几帧动画 */
       animation-timing-function: steps(2, end);
     }
 
@@ -123,10 +128,11 @@
         clip-path: var(--slice-1);
         transform: translate(0);
       }
-  }
+    }
+
   </style>
 </head>
-<body> 
+<body>
   <button>AVAILABLE NOW</button>
 </body>
 </html>
