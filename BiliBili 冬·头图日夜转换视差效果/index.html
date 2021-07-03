@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日夜转换视图</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    header {
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+
+      --percentage: 0.5;
+    }
+
+    header .view, header .tree {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      /* 牛逼呀，postion 和 flex一起在用 会相互有什么影响，执行是否有什么优先级呢？ */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    header img, header video {
+      position: absolute;
+      display: block;
+      width: 120%;
+      height: 100%;
+
+      /* 牛逼！ object-fit设定为cover图片就会按比例放大填满 */
+      object-fit: cover;
+    }
+
+    header .morning {
+      z-index: 20;
+      opacity: calc(1 - (var(--percentage) - 0.25) / 0.25);
+    }
+
+    header .afternoon {
+      z-index: 10;
+      opacity: calc(1 - (var(--percentage) - 0.5) / 0.5);
+    }
+
+    header .view {
+      transform: translateX(calc(var(--percentage) * 100px));
+    }
+
+    header .tree {
+      transform: translateX(calc(var(--percentage) * 50px));
+      /* 这个模糊化 用得牛逼啊 */
+      filter: blur(3px)
+    }
+
+    header .view,
+    header .tree,
+    header .morning,
+    header .afternoon {
+      transition: .2s all ease-in-out;
+    }
+
+/* 这个加moving的效果真的牛逼 可以查查 */
+    header.moving .view,
+    header.moving .tree,
+    header.moving .morning,
+    header.moving .afternoon {
+      transition: none;
+    }
+
+    header .window-cover {
+      opacity: calc((var(--percentage) - 0.9) / 0.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="view">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-view-1.jpg" class="morning" alt="">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-view-2.jpg" class="afternoon" alt="">
+      <!-- 这个vide 的用法真的要好好研究研究，苹果官网也是喜欢这样搞 -->
+      <video autoplay loop muted class="evening">
+        <!-- 这个.webm 后缀 感觉挺厉害的 -->
+        <source src="https://assets.codepen.io/2002878/bilibili-winter-view-3.webm" type="video/webm" alt="">
+      </video>
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-view-3-snow.png" class="window-cover" alt="">
+    </div>
+    
+    <div class="tree">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-1.png" class="morning" alt="">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-2.png" class="afternoon" alt="">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-3.png" class="evening" alt="">
+    </div>
+  </header>
+</body>
+<script>
+  let startingPoint;
+  const header = document.querySelector('header');
+
+  header.addEventListener('mouseenter', e => {
+    startingPoint = e.clientX;
+    header.classList.add('moving');
+  })
+
+  header.addEventListener('mouseout', e => {
+    header.classList.remove('moving');
+    header.style.setProperty('--percentage', 0.5);
+  })
+
+  header.addEventListener('mousemove', e => {
+    // 这样，游标移到最左的
+    let percentage = (e.clientX - startingPoint) / window.outerWidth + 0.5;
+
+    header.style.setProperty('--percentage', percentage);
+  })
+</script>
+</html>

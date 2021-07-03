@@ -10,19 +10,24 @@
       font-size: 32px;
     }
     body {
+      /* 在body内控制整个局面的排布 */
+      /* ---------上下左右居中---------- */
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
       flex-direction: column;
+      /* ----------------------------- */
+      min-height: 100vh;
       background-color: #FFCD00;
       font-family: 'Concert One', cursive;
-
-      /* 透视效果(近大远小) */
-      perspective: 2500px;
+      /* ---------------------------------- */
+      /* 透视效果(近大远小) 这个透视的效果要好好研究研究 */
+      /* 这是设定立体的透视深度有多少 */
+      /* 像素越小  透视效果越明显 */
+      perspective: 800px;
     }
 
-    /* 这种用法很有意思 */
+    /* 想一想relative布局的效果 */
     h1, h2 {
       padding: 0;
       margin: 0;
@@ -35,6 +40,8 @@
       margin-top: 60px;
     }
 
+    /* 有空可以想想rem的优势是什么 */
+    /* 似乎rem是体现移动端自适应布局的 */
     h1 {
       font-size: 10rem;
       animation: 5s rotate ease-in-out infinite;
@@ -42,7 +49,7 @@
 
     @keyframes rotate {
       0%, 100% {
-        /* rotate3d  [x, y, z] */
+        /* rotate3d(x, y, z, deg) 下面的意思是 沿着y轴旋转20° */
         transform: rotate3d(0, 1, 0, -20deg);
       }
       50% {
@@ -52,6 +59,7 @@
 
     h2 {
       font-style: 5rem;
+      /* 这是用来体现字距的 */
       letter-spacing: -4px;
       animation: 2.5s thank-you ease-in-out infinite;
     }
@@ -67,6 +75,9 @@
 
 
     /* h1 h2的before和after 会受到 h1和h2的position的干扰，达到子绝父相的效果 */
+    /* 这里的::after 和 ::before 两个伪元素 都可以当作是h1的子元素 */
+    /* 而且这里的子元素好像针对的就是文字作为元素 */
+    /* 这里的选择器的使用也太棒了！ */
     h1::before, 
     h1::after {
       content: '30000';
@@ -77,7 +88,8 @@
       content: 'Thank You!'
     }
 
-    /* 两层30000和两层Thank You!都被放进了最下层 */
+    /* 让伪类的文字进行重合 */
+    /* 这里的重合效果就 需要子绝父相的效果才行 */
     h1::before,
     h1::after,
     h2::before,
@@ -96,12 +108,14 @@
 
     h1::before {
       color: #009CDE;
+      /* animation 和 @keyframes 相互来搭配 */
       animation: 5s h1-before ease-in-out infinite;
     }
 
     @keyframes h1-before {
+      /* 这个rotate 和 translate3d的效果我要好好研究研究 */
       0%, 100% {
-        transform: rotate3d(15px, 5px, -10px);
+        transform: translate3d(15px, 5px, -10px);
       } 
       50% {
         transform: translate3d(-15px, 5px, -10px);
@@ -115,7 +129,7 @@
 
     @keyframes h1-after {
       0%, 100% {
-        transform: rotate3d(30px, 10px, -20px);
+        transform: translate3d(30px, 10px, -20px);
       }
       50% {
         transform: translate3d(-30px, 10px, -20px);
@@ -156,6 +170,7 @@
   <h1>30000</h1>
   <h2>Thank You!</h2>
 
+  <!-- a 和 href搭配 -->
   <a href="https://space.bilibili.com/451368848" target="_blank">
     <img src="https://assets.codepen.io/2002878/codingstartup-logo-rounded.png" />
   </a>

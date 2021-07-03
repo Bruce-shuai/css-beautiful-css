@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自己写一个立体动图</title>
+  <style>
+    :root {
+      /* 为响应式布局 rem 来 */
+      font-size: 32px;    
+
+    }
+
+    body {
+      /* 在body为整个局面来布个局 */
+      /* 这里是上下左右都要居中 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      /* 让body撑到整个页面 */
+      min-height: 100vh;
+      /* 整个好看的全局颜色调调 */
+      /* 其实这个背景色 还可以再整好看点的！！最好是那种过渡的颜色 */
+      background-color: #1491a8;
+      font-family: 'Concert One', cursive;
+      
+      /* 再添加一个透视效果 */
+      perspective: 600px;
+    }
+
+    h1, h2 {
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 5.8rem;
+      /* 这个rotate3d 到底有什么魅力？ 为什么感觉似乎可以直接带动 after和before这两个伪元素 */
+      animation: 5s rotate ease-in-out infinite;
+    }
+
+    @keyframes rotate {
+      0%, 100% {
+        transform: rotate3d(0, 1, 0, -20deg);
+      }
+      50% {
+        transform: rotate3d(0, 1, 0, 20deg);
+      }
+    }
+
+    h2 {
+      /* 在rem 中是支持小数的 */
+      font-size: 1.5rem;
+      animation: 2.5s bilibili ease-in-out infinite;
+    }
+
+    @keyframes bilibili {
+      0%, 100% {
+        transform: rotate3d(1, 0, 0, -10deg);
+      } 
+      50% {
+        transform: rotate3d(1, 0, 0, 10deg);
+      }
+    }
+
+    /* ----- 下面展示的是三层文字嵌套----- */
+    h1::after, h1::before {
+      content: '帅得乱七八糟';
+    }
+
+    h2::after, h2::before {
+      content: 'bilibili'
+    }
+
+    h1::after,
+    h1::before,
+    h2::after,
+    h2::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    /* ------------------------------ */
+
+
+    h1::before, h2::before {
+      color: #bacf65;
+      z-index: -1;
+    }
+
+    h1::after, h2::after {
+      color: #373834;
+      z-index: -2;
+    } 
+
+
+    h1::before {
+      animation: 5s h1-before ease-in-out infinite;
+    }
+
+    @keyframes h1-before {
+      0%, 100% {
+        transform: translate3d(6px, 4px, -4px);
+      }
+      50% {
+        transform: translate3d(-6px, 4px, -4px);
+      }
+    }
+
+    h1::after {
+      animation: 5s h1-after ease-in-out infinite;
+    }
+
+    @keyframes h1-after {
+      0%, 100%  {
+        transform: translate3d(12px, 8px, -8px);
+      }
+      50% {
+        transform: translate3d(-12px, 8px, -8px);
+      }
+    }
+
+    h2::before {
+      animation: 2.5s h2-before ease-in-out infinite;
+    }
+
+    @keyframes h2-before {
+      0%, 100% {
+        transform: translate3d(0px, 4px, -10px);
+      }
+      50% {
+        transform: translate3d(0px, -2px, -10px);
+      }
+    }
+
+    h2::after {
+      animation: 2.5s h2-after ease-in-out infinite;
+    }
+
+    @keyframes h2-after {
+      0%, 100% {
+        transform: translate3d(0px, 8px, -20px);
+      }
+      50% {
+        transform: translate3d(0px, -4px, -20px);
+      }
+    }
+    /* ----------------------------- */
+    img {
+      /* 这样直接让正方向图标 */
+      border-radius: 50%;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>帅得乱七八糟</h1>
+  <h2>bilibili</h2>
+
+  <!-- 是用a来包裹img -->
+  <!-- a 标签的target是什么呢？ -->
+  <a href="https://space.bilibili.com/">
+    <img src="https://i2.hdslb.com/bfs/face/a7c5808c3a2578d0e1927a0615d33d45134eab9d.jpg@96w_96h_1c.jpg" alt="帅得乱七八糟_">
+  </a>
+</body>
+</html>
