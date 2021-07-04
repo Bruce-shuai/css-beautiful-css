@@ -3,7 +3,7 @@
 }
 
 body {
-  /* 这里使用了flex 让内容左右居中 */
+  /* 这里使用了flex 让内容左右居中。 其实都是用过很多遍的老方法了 */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,14 +15,23 @@ h1 {
   font-size: 4rem;
   margin: 0;
   padding: 0;
-  /* 这是等宽字体 */
+
+  /* 等宽字体效果 使用的是一套等宽的字体 */
   font-family: monospace;
-  /* 新知识 CSS3的单位 ch */
+
+  /* 这里是真的牛逼 新知识 CSS3的单位 ch */
+  /* ch 是 character 的意思，即是一个单字  1ch 的宽度等于数目字0的宽度*/
+  /* 由于我们使用了等宽字体 所以1ch就等于任何英文字、数字、符号等的宽度 */
+  /* ch 和 overflow: hidden 搭配的效果也是很优秀的 */
+
+  /* forwards 是停留到最后一帧 */
+  /* steps(13, jump-none) 代表这个动画会分为13格去显示 */
   /* width: 6ch;
   overflow: hidden;
   animation: 3s typing steps(13, jump-none) forwards; */
 
   position: relative;
+  /* relative 和 伪元素更配哦！ */
 }
 
 /* @keyframes typing {
@@ -36,9 +45,10 @@ h1 {
 
 /* 这应该是相当于在h1的最后写一根竖线，只不过h1在不断增加？ */
 h1::after {
-  /* 这里为什么要写成content=''呢？ */
+  /* 这里为什么要写成content:''呢？ */
   content: "";
   /* 这里弄个行内块是有什么用呢？ */
+  /* ::after 默认是 inline */
   display: inline-block;
   position: absolute;
 
