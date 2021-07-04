@@ -16,17 +16,19 @@
       align-items: center;
       min-height: 100vh;
       overflow: hidden;
+      background-image: linear-gradient(to bottom, #ea517f, #1a94bc);
     }
 
-    h1 {
+    h1 { 
       font-size: 4rem;
       margin: 0;
       padding: 0;
       font-family: monospace;
-
+      /* color: #ed2f6a; */
+      /* color: #22a2c3; */
+      color: var(--color);
       /* width: 0ch; */
       /* overflow: hidden; */
-
       /* animation: 2.1s typing steps(13, jump-none) forwards; */
       position: relative;
     }
@@ -44,7 +46,7 @@
       /* 由于默认是内联样式，inline-block 才能设置宽度 */
       display: inline-block;
       position: absolute;
-      width: 14px;
+      width: 8px;
       height: 4rem;
       /* 注意，这里是 background-color 设置颜色 而不是在 color里设置颜色 */
       background-color: #000;
@@ -67,10 +69,12 @@
     }
 
     h1 span {
+      --color: #22a2c3;
       --delay1: 10s;
       --delay2: 10s;
       display: inline-block;
       overflow: hidden;
+      color: var(--color);
       width: 0ch;
       animation: .1s var(--delay1) text-in ease-in-out forwards,
       .1s var(--delay2) text-out ease-in-out forwards;
@@ -108,6 +112,7 @@
   // 通过正则表达式为每个字母都套上一层<span> 至于$& 就记住这种操作就可以
   h1.innerHTML = h1.textContent.replace(/\S/g, "<span>$&</span>")
 
+  let color = '#'
   let delay1 = 0;
   let delay2 = 1.6;
   // 数组来使用 forEach
@@ -127,6 +132,10 @@
       delay2 += 0.8;
       delay1 += 1;
       delay2 += 2.5;
+    }
+
+    if (index >= 9) {
+      span.style.setProperty('--color', '#ed2f6a');
     }
     // if (index === 6) {
     //   delay1 += 1;
