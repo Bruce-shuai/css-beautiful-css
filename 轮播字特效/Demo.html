@@ -21,8 +21,9 @@
     h2 {
       width: 980px;
       font-size: 100px;
+      /* 苹果祖传字体 */
       font-family: Helvetica;
-      /* 行间距 */
+      /* 行间距  数字 是用来乘以字体的大小的 */
       line-height: 1.06;
       /* 这个可以研究研究 */
       letter-spacing: -0.02em;
@@ -34,6 +35,7 @@
       height: 106px;
       /* 这个relative在这里是起了大用 */
       position: relative;
+      /* 这里使用的overflow 起到隐藏区域外的 */
       overflow: hidden;
       margin-top: var(--offset);
     }
@@ -48,14 +50,15 @@
       /* 上下、左右都撑到了最大 */
       background-size: 100% 100%;
       /* 这个clip 用得妙啊~ */
+      /* clip 和 background-image 配合让文字的颜色是过渡的 */
       -webkit-background-clip: text;
       background-clip: text;
-      /* 这个感觉有点厉害啊 */
+      /* 这个感觉有点厉害啊  而且text-fill 改为transparent的颜色，厉害厉害 */
       -webkit-text-fill-color: transparent;
       background-repeat: no-repeat;
     }
 
-    /* 这个span[data-show]的操作感觉挺秀的啊 */
+    /* 这样的方式来定义特定标注自定义的html属性的标签 */
     .mask span[data-show] {
       /* translateY Y轴移动 */
       transform: translateY(-100%);
@@ -89,7 +92,8 @@
   <h2>
     Turn your living room into
     <div class="mask">
-      <!-- data-show 是自己定义的属性名？ -->
+      <!-- data-show 是自己定义的html属性 -->
+      <!-- 在HTML5中添加了data-*的方式来自定义属性 -->
       <span data-show>a theater.</span>
       <span>a gym.</span>
       <span>a concert hall.</span>
@@ -100,16 +104,21 @@
     // Element.removeAttribute()从指定的元素中删除一个属性
     // nextElementSibling 返回下一个列表选项的HTML的内容
     // setInterval 是不断重复调用回调函数
+    // 轮播效果  核心就是使用setInterval效果
     setInterval(function () {
       const show = document.querySelector('span[data-show]')
+      // show元素同层的下一个元素
+      // 这里的span:first-child 运用得很好
       const next = show.nextElementSibling || document.querySelector('span:first-child')
       const up = document.querySelector('span[data-up]')
   
       if (up) {
+        // 移去自定义的属性  data-up
         up.removeAttribute('data-up')
       }
   
       show.removeAttribute('data-show')
+      // 这里表示 data-up 没有具体的值
       show.setAttribute('data-up', '')
   
       next.setAttribute('data-show', '')

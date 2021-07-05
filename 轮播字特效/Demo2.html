@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文字轮播图</title>
+  <style>
+    :root {
+      --offset: 6px;
+    }
+    body {
+      /* 日常居中 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h2 {
+      width: 980px;
+      font-size: 100px;
+      font-family: Helvetica;
+      /* 这个行间距 需要有点操作才行 */
+      line-height: 1.16;
+      /* em是支持边距缩短 */
+      letter-spacing: -0.02em;
+      color: #1d1d1d;
+    }
+
+    .mask {
+      /* 仔细想想行间距与文字大小的关系 */
+      height: 106px;
+      /* 其实relative的用法 主要是为了实现子绝父相 */
+      position: relative;
+      /* 其实可以思考一下overflow的用法 */
+      overflow: hidden;
+      margin-top: var(--offset);
+    }
+    
+    .mask span {
+      display: block;
+      position: absolute;
+      top: 100px;
+      
+      /* 这个clip的内容要好好研究研究 */
+      background-clip: text;
+      -webkit-background-clip: text;
+      /* 搭配这个text-fill 改为transparent 就可以让文字有过渡效果 */
+      -webkit-text-fill-color: transparent;
+    }
+
+    .mask span[data-up] {
+      /* 这种移动似乎比top:-200px 更优秀一些 */
+      transform: translateY(-200%);
+      /* 让滚动没有那么生硬  这里的transform 是选择器内的元素 */
+      transition: .5s transform ease-in-out;
+    }
+
+    .mask span[data-show] {
+      transform: translateY(-100%);
+      transition: .5s transform ease-in-out;
+    }
+
+    .mask span:nth-child(1) {
+      /* 我对于这个百分号的使用其实还是有点困惑 */
+      /* 明天上午其实还是可以对这个再研究研究 */
+      background-image: linear-gradient(45deg, #0ecffe 50%, #07a6f1);
+    }
+
+    .mask span:nth-child(2) {
+      background-image: linear-gradient(45deg, #18e198 50%, #0ec15d);
+    }
+
+    .mask span:nth-child(3) {
+      background-image: linear-gradient(45deg, #8a7cfb 50%, #633e9c);
+    }
+
+    .mask span:nth-child(4) {
+      background-image: linear-gradient(45deg, #fa7671 50%, #f45f7f);
+    }
+  </style>
+</head>
+<body>
+  <h2>
+    Turn your living room into
+    <div class="mask">
+      <!-- 这个data-开头的是自定义的html属性 -->
+      <span data-show>a theater.</span>
+      <span>a gym.</span>
+      <span>a concert hall.</span>
+      <span>an arcade</span>
+    </div>
+  </h2>
+</body>
+<script>
+  setInterval(function() {
+    const show = document.querySelector('span[data-show]');
+    const next = show.nextElementSibling || document.querySelector('span:first-child');
+    const up = document.querySelector('span[data-up]');
+
+    if (up) {
+      // 如果有data-up属性，那么就移除data-up属性
+      up.removeAttribute('data-up');
+    }
+
+    show.removeAttribute('data-show');
+    show.setAttribute('data-up', '');
+
+    next.setAttribute('data-show', '')
+  }, 2000)
+</script>
+</html>

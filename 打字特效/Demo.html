@@ -69,7 +69,8 @@
     }
 
     h1 span {
-      --color: #22a2c3;
+      --color1: #22a2c3;
+      --color2: #fff;
       --delay1: 10s;
       --delay2: 10s;
       display: inline-block;
@@ -78,6 +79,12 @@
       width: 0ch;
       animation: .1s var(--delay1) text-in ease-in-out forwards,
       .1s var(--delay2) text-out ease-in-out forwards;
+
+
+      background-image: linear-gradient(45deg, var(--color1) 38%, var(--color2));
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
       /* animation: 1s calc(1s + var(--delay)) text-in ease-in-out forwards; */
       /* 1s 6s text-out ease-in-out forwards; */
       /* animation-delay: calc(1s + var(--delay)); */
@@ -112,7 +119,9 @@
   // 通过正则表达式为每个字母都套上一层<span> 至于$& 就记住这种操作就可以
   h1.innerHTML = h1.textContent.replace(/\S/g, "<span>$&</span>")
 
-  let color = '#'
+  setInterval(() => {
+    
+  })
   let delay1 = 0;
   let delay2 = 1.6;
   // 数组来使用 forEach
@@ -135,7 +144,8 @@
     }
 
     if (index >= 9) {
-      span.style.setProperty('--color', '#ed2f6a');
+      span.style.setProperty('--color1', '#ef3473');
+      span.style.setProperty('--color2', '#9b1e64');
     }
     // if (index === 6) {
     //   delay1 += 1;
