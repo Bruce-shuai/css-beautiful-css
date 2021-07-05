@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新iMac文字压缩效果</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .imac img {
+      /* 如果这里不设置为block 会怎么样呢？*/
+      display: block;
+      /* 这种图片置中的方法和flex置中的方法有什么区别没有？ */
+      /* 对于这个问题，可以再去温习温习芬哥的对应视频 */
+      position: relative;
+      left: 50%;
+      top: 50%;
+      transform: translate(calc(-50% - 30px), 0);
+    }
+
+    h2 {
+      font-size: 72px;
+      font-family: Helvetica;
+      letter-spacing: -.012em;
+      /* 这里的width用得非常的妙，在不遮盖字体的情况下，让字体显现出来 */
+      width: 290px;
+      font-weight: normal;
+      /* 这里搭配relative 使用left的百分比的确厉害 */
+      position: relative;
+      left: 50%;
+
+      /* 这里就要使用无敌的sticky了！ */
+      /* 即使前面用了position，这里也还可以这样使用 */
+      position: sticky;
+      /* 其实有一个问题  这里的top是距离盒子的border 还是margin呢？ */
+      top: -1px;
+      margin: 80px 0;
+      padding: 0;
+
+      /* 缩小文字最简单的方法通过 transform:scale(); 来实现的 */
+      /* climp() 函数  艹，感觉厉害啊！当--scale小于0.15时，就会是0.15 大于1时，就会是1 */
+      transform: scale(clamp(0.15, var(--scale), 1));
+      /* 这个transform-origin 效果太牛了 */
+      transform-origin: 0% 0%;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="imac">
+    <h2 style="--scale: 1">Only 11.5mm. Now that's thin.</h2>
+    <div class='image'>
+      <!-- 这张图片是非常大的 -->
+      <img src="https://www.apple.com/105/media/us/imac-24/2021/5e004d75-3ad6-4bb9-ab59-41f891fc52f0/anim/design-hero/large/flow/flow_startframe.jpg" alt="">
+    </div>
+  </div>
+</body>
+<script>
+
+  let isPinned = false;
+  const h2 = document.querySelector('h2');
+
+  // IntersectionObserver() 这个API 可以判断sticky什么时候被触发
+  // [e]这个写法代表获取数组中的第一个元素
+  const observer = new IntersectionObserver(([e]) => {
+    isPinned = e.intersectionRatio < 1;
+    // classList  是一个什么用法 这个可以查查
+    // 这一行的代码其实都没怎么理解到位
+    e.target.classList.toggle('pinned', isPinned)
+  }, { threshold: [1]})
+
+  observer.observe(h2);
+
+  // scroll 事件  
+  document.addEventListener('scroll', e => {
+    if (isPinned) {
+      let html = document.documentElement;   // 这个内容知识点挺好的
+      // 将数据转为数字
+      let height = parseInt(getComputedStyle(h2).getPropertyValue('height')) +        // 将h2的高度获取回来
+      parseInt(getComputedStyle(h2).getPropertyValue('margin-bottom'));
+      let marginTop = parseInt(getComputedStyle(h2).getPropertyValue('margin-top'))
+
+      // html.scrollTop  是一个什么效果
+      // scrolled 的范围是 0~1  在触发sticky的时候才会使用
+      let scrolled = (html.scrollTop - marginTop) / height;
+
+      h2.style.setProperty('--scale', (1 - scrolled))
+    }
+  })
+</script>
+</html>
