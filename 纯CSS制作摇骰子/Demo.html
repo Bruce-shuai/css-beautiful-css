@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>纯CSS制作摇骰子</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .dice {
+      background-image: url(https://assets.codepen.io/2002878/random-dice.png);
+      width: 366px;
+      height: 366px;
+      /* 这个position 要好好研究研究 */
+      background-position: 0% 100%;
+      animation: .2s steps(5, start) random infinite;
+    }
+
+    @keyframes random {
+      from {
+        background-position: 0% 100%;
+      }
+      to {
+        background-position: 100% 100%;
+      }
+    }
+
+    #dice {
+      display: none;
+    }
+
+    #dice:checked + label .dice {
+      /* 这个animation-play-state 效果的确该好好研究研究才行 */
+      animation-play-state: paused;
+    }
+
+    .dice::before {
+      content: '?';
+      /* 背景颜色设定为80%透明度的白色 */
+      background-color: rgba(255, 255, 255, .8);
+      /* 宽度和高度继承自父元素，设定为inherit */
+      width: inherit;
+      height: inherit;
+      /* 似乎使用了flex  就会让行内元素变为块内元素 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Helvetica;
+      font-size: 320px;
+      /* 背景变为模糊的 */
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 60px;
+    }
+
+    #dice:checked + label .dice::before {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <input type="checkbox" id="dice">
+  <label for="dice">
+    <div class="dice"></div>
+  </label>
+</body>
+</html>
