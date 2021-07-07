@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>敲代码的日与夜</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .sun {
+      position: absolute;
+      /* 这里的百分比使用 真的用得挺好的 */
+      width: 100%;
+      height: 100%;
+      background-color: #FFEEA2;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      z-index: 10;
+
+      /* 这里的clip-path用得很妙啊 */
+      clip-path: inset(0px 50% 0px 0px); 
+
+      /* 这个display: none 用得真的巧妙，而且感觉效果还是挺棒的 */
+      /* display: none; */
+    }
+    .sun::after {
+      content: '';
+      display: block;
+      width: 600px;
+      height: 600px;
+      background-color: orange;
+      border-radius: 50%;
+    }
+
+    .sea {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 30%;
+      /* 模糊的毛玻璃效果 这个还真是牛逼*/
+      backdrop-filter: blur(100px);
+      -webkit-backdrop-filter: blur(100px);
+      z-index: 20;
+    }
+
+    .moon {
+      position: absolute;
+      background-color: #040720;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .moon::after {
+      content: '';
+      display: block;
+      width: 600px;
+      height: 600px;
+
+      /* 月亮形状可以使用 box-shadow来制作 */
+      box-shadow: 160px 180px 0px cyan;
+      /* 为什么会呈现月亮的样子呢 */
+      border-radius: 50%;
+      transform: translate(-160px, -180px);
+    }
+  </style>
+</head>
+<body>
+  <div class="sun"></div>
+  <div class="moon"></div>
+  <div class="sea"></div>
+</body>
+<script>
+  // 这里搭配的js 也是用得非常的巧妙
+  window.addEventListener('mousemove', e => {
+    let percentage = (100 - e.clientX / window.innerWidth * 100);
+    document.querySelector('.sun').style.clipPath = `inset(0px ${percentage}% 0px 0px)`;
+  })
+</script>
+</html>
