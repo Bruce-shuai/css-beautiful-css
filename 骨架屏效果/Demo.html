@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>骨架屏效果</title>
+  <style>
+    :root {
+      /* 因为要在多处使用相同的颜色，所以直接在:root 
+      上先定义一个用于调颜色的变量，这里说实话，弄得太好了 */
+      --loading-grey: #ededed;
+    }
+
+    body {
+      background-color: #f6f6f6;
+      font-family: Helvetica;
+      font-size: 18px;
+      display: flex;
+      /* 可以再复习复习 space-evenly 的用法是什么 */
+      justify-content: space-evenly;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      width: 320px;
+      background-color: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, .12);
+    }
+
+    .image {
+      /* 难道这就是在img标签外再嵌套一个div的原因了吗 */
+      height: 200px;
+    }
+
+    .image img {
+      /* 注意： img 是行内元素 */
+      display: block;
+      /* 其实有个问题 为什么 width 可以使用100% 但是 height 不能使用100% 反而是使用inherit */
+      width: 100%;
+      height: inherit;
+      /* 为了保持图片的比例，将object-fit 设定为cover */
+      /* 具体怎么使用 还是要查查文档 */
+      object-fit: cover;
+    }
+
+    .content {
+      /* 这里的rem 或者说 em 用法是怎么样的，值得去查一查 */
+      padding: 2rem 1.8rem;
+    }
+
+    h4 {
+      /* margin 设定为上左右都是0，下是1rem */
+      margin: 0 0 1rem; 
+      /* 这里的size 和 height 其实可以值得好好研究研究 */
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+    }
+
+    .description {
+      font-size: 1rem;
+      line-height: 1.4rem;
+    }
+
+    /* 设置颜色为浅灰色 */
+    .loading .image,
+    .loading h4,
+    .loading .description {
+      /* background-color: var(--loading-grey); */
+      /* 背景颜色 设置为渐层颜色 */
+      background: linear-gradient(
+        100deg,
+        /* 全透明的白色，位置在40% */
+        rgba(255, 255, 255, 0) 40%,
+        /* 转变为半透明的白色，位置在50% */
+        rgba(255, 255, 255, 0.5) 50%,
+        /* 再到全透明的白色，位置在60% */
+        rgba(255, 255, 255, 0) 60%
+      ) var(--loading-grey);
+
+      /* 设置动画 */
+      /* 先将这个背景的宽度，拉成两倍大小，设定为200% 高度维持100% */
+      /* 然后通过 background-position 控制背景的位移，从而达到扫光的效果 */
+      background-size: 200% 100%;
+
+      animation: 1s loading ease-in-out infinite;
+    }
+    @keyframes loading {
+      from {
+        background-position-x: 120%;
+      }
+      to {
+        background-position-x: -20%;
+      }
+    }
+
+    .loading h4 {
+      /* 其实这里的rem 肯定是内藏玄机的 要好好研究研究 */
+      min-height: 1.6rem;
+      border-radius: 4px;
+    }
+
+    .loading .description {
+      min-height: 2.8rem;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="image">
+      <!-- 似乎都会给图片嵌一个套 -->
+      <!-- 不知道这样做的原因是为什么呢 -->
+      <img src="https://assets.codepen.io/2002878/wake-up-and-code.jpg" alt="">
+    </div>
+    <div class="content">
+      <h4>帅得乱七八糟</h4>
+      <div class="descripion">
+        把喜欢的事情做到极致<br>
+        保持饥饿，保持愚蠢
+      </div>
+    </div>
+  </div>
+  <!-- 这里相当于又加了一个loading的class -->
+  <div class="card loading">
+    <div class="image"></div>
+    <div class="content">
+      <h4></h4>
+      <div class="description"></div>
+    </div>
+  </div>
+</body>
+</html>
