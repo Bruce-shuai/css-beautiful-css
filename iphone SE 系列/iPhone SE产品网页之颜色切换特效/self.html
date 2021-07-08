@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>iphone SE 颜色切换特效</title>
   <style>
     html {
       font-size: 48px;
-      
+
       --iphone-black-bg: #000;
       --iphone-black-text: #f2f2f2;
       
@@ -26,12 +26,14 @@
 
     body {
       margin: 0;
+      /* 其实不知道设置这个是有什么用的 */
       height: 4000px;
       font-family: Helvetica;
       background-color: #000;
     }
 
     .sticky-container {
+      /* 似乎要想让sticky 发挥出它应该有的效果的话，就需要搭配top 以及 高度来实现 */
       position: sticky;
       top: 0;
       width: 100%;
@@ -45,6 +47,7 @@
       justify-content: center;
       align-items: center;
       width: 100%;
+      /* 这里的height 为100vh 目的是为了什么呢？ */
       height: 100vh;
       position: absolute;
       top: 0;
@@ -63,7 +66,7 @@
       margin-bottom: var(--iphone-offscreen);
     }
 
-    /* 这个 .iphone.black  能写成.iphone .black 吗 */
+    /* 似乎对于类选择器的使用  必须要连续起来才行 */
     .sticky-container .iphone.black {
       background-color: var(--iphone-black-bg);
       z-index: 10;
@@ -76,7 +79,6 @@
     .sticky-container .iphone.white {
       background-color: var(--iphone-white-bg);
       z-index: 20;
-      
       clip-path: inset(100% 0px 0px 0px);
     }
 
@@ -106,6 +108,7 @@
     .sticky-container.no-sticky {
       position: relative;
       /* 这里的visib效果是啥  和 relative 搭配是有特效吗？ */
+      /* visible 似乎就是默认的 */
       overflow: visible;
     }
 
@@ -123,6 +126,7 @@
     <div class="iphone black">
       <h3>
         Comes in Black.<br>
+        <!-- &nbsp; 应该算不换行的空格 -->
         &nbsp;
       </h3>
       <img src="https://www.apple.com/v/iphone-se/b/images/overview/finishes_black__b06syayq94wi_medium_2x.png">
@@ -132,7 +136,6 @@
         Comes in Black.<br>
         <span>White</span>
       </h3>
-      
       <img src="https://www.apple.com/v/iphone-se/b/images/overview/finishes_white__drv9fwq9vzwy_medium_2x.png">
     </div>
     <div class="iphone red">
@@ -140,32 +143,43 @@
         Comes in Black.<br>
         White. <span>And Pow.</span>
       </h3>
-      
       <img src="https://www.apple.com/v/iphone-se/b/images/overview/finishes_red__eqfv1ongy282_medium_2x.png">
     </div>
   </div>
 </body>
-<script>
-  window.addEventListener('scroll', (e) => {
-  let noStickyOffset = document.documentElement.clientHeight * 2
-  // 目前的卷动距离，除以页面总高度减去视窗高度
-  // 即当前滚动距离 / 页面可滚动距离 (结果：0 代表卷动到最顶，1代表卷动到最底)
-  let scrolled = document.documentElement.scrollTop / noStickyOffset
-  
-  // 这里的变量命名其实也是非常的有特点
-  let $white = document.querySelector('.white')
-  let $red = document.querySelector('.red')
-  
-  // 百分比的效果为负数后该怎么处理呢？ 这里似乎在理解上还是有点问题啊
-  $white.style.clipPath = `inset(${((0.5 - scrolled) / 0.5) * 100}% 0px 0px 0px)`
-  $red.style.clipPath = `inset(${((1 - scrolled) / 0.5) * 100}% 0px 0px 0px)`
-  
-  // 这里的添加类属性 和 删除类属性的操作的确可以
-  if (scrolled >= 1) {
-    document.querySelector('.sticky-container').classList.add('no-sticky')
-  } else {
-    document.querySelector('.sticky-container').classList.remove('no-sticky')
-  }
-})
-</script>
+  <script>
+    window.addEventListener('scroll', e => {
+      // let scrolled = document.documentElement.scrollTop / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+      // 指当前可显示屏幕顶部距离真实页面的顶部的距离
+      // console.log('document.documentElement.scrollTop', document.documentElement.scrollTop);
+      // 页面的总长度
+      // console.log('document.documentElement.scrollHeight', document.documentElement.scrollHeight);
+      // 当前可显示屏幕的高度
+      // console.log('document.documentElement.clientHeight', document.documentElement.clientHeight);
+    
+      let noStickyOffset = document.documentElement.clientHeight * 2;
+      let scrolled = document.documentElement.scrollTop / noStickyOffset;
+
+      let $white = document.querySelector('.white');
+      let $red = document.querySelector('.red');
+
+      $white.style.clipPath = `inset(${((0.5 - scrolled) / 0.5) * 100}% 0px 0px 0px)`;
+      $red.style.clipPath = `inset(${((1 - scrolled) / 0.5) * 100}% 0px 0px 0px)`;
+      
+      // 这里的设计就很巧妙了，让整个页面前半部分可以有完整的色彩过渡，整个页面的后半部分有另外的
+      // 0~0.5
+      // console.log('scrolled', scrolled);
+      // 1~0
+      // console.log('mix', (0.5 - scrolled) / 0.5);
+      // 0.5~1
+      // 0~-1
+
+      if (scrolled >= 1) {
+        // 这个classList 是怎么个用法?
+        document.querySelector('.sticky-container').classList.add('no-sticky');
+      } else {
+        document.querySelector('.sticky-container').classList.remove('no-sticky');
+      }
+    })
+  </script>
 </html>
