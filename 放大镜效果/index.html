@@ -7,6 +7,7 @@
   <title>Document</title>
   <style>
     body {
+      /* 将内容上下左右居中其实就没必要再多说 */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -19,6 +20,7 @@
       background-color: #000;
       /* 这个900/900 是一个什么操作？ */
       background-image: url(https://placekitten.com/900/900);
+      /* background-size 这个用法其实值得好好思考思考 */
       background-size: 300px 300px;
       background-repeat: no-repeat;
     }
@@ -33,8 +35,11 @@
   <div id="image"></div>
 </body>
 <script>
+  // 会在游标进入图片时触发
   document.querySelector('#image').addEventListener('mouseenter', enterHandler);
+  // 会在游标在图片上移动时触发
   document.querySelector('#image').addEventListener('mousemove', moveHandler);
+  // 会在游标离开图片时触发
   document.querySelector('#image').addEventListener('mouseleave', leaveHandler);
   
   function enterHandler(e) {
@@ -43,13 +48,19 @@
   }
 
   function moveHandler(e) {
-    // 这一个函数式用来干什么的呢？
+    // 获取容器大小？
     let rect = e.target.getBoundingClientRect();
+    console.log('rect', rect);
+    // 这里指的是游标移到图片上的x方向百分比和y方向百分比
     let x = e.offsetX / rect.width;
     let y = e.offsetY / rect.height;
 
-    e.target.style.setProperty('--x', x);
-    e.target.style.setProperty('--y', y);
+    // 有一个问题就是  e.target.setAttribute 和  e.target.style.setProperty 这两个属性有什么区别呢？
+    // e.target.style.setProperty('--x', x);
+    // e.target.style.setProperty('--y', y);
+    // 其实可以见到  x 的范围是 0~1    y的范围也是 0~1
+    // console.log('x', x);
+    // console.log('y', y);
   }
 
   function leaveHandler(e) {

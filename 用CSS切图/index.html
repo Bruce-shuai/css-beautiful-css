@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    ul.stacks {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      /* 用这样的方式来控制li横向排列 */
+      flex-direction: row;
+
+      height: 100vh;
+    }
+
+    ul.stacks li {
+      /* ccc 原来是灰色 */
+      background-color: #ccc;
+      /* 这样就可以将li 填充所有可用的空间 */
+      flex: 1;
+      /* margin-right: 1px; */
+      overflow: hidden;
+      position: relative;
+    }
+
+    ul.stacks li::after {
+      content: '';
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      background-image: url(https://images.unsplash.com/photo-1536700503339-1e4b06520771?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2700&q=80);
+      /* 这样背景图片就可以按比例缩放了 */
+      background-size: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    ul.stacks li:nth-child(2)::after {
+      left: -10vw;
+      transition-delay: 0.1s;
+    }
+    ul.stacks li:nth-child(3)::after {
+      left: -20vw;
+      transition-delay: 0.2s;
+    }
+    ul.stacks li:nth-child(4)::after {
+      left: -30vw;
+      transition-delay: 0.3s;
+    }
+    ul.stacks li:nth-child(5)::after {
+      left: -40vw;
+      transition-delay: 0.4s;
+    }
+    ul.stacks li:nth-child(6)::after {
+      left: -50vw;
+      transition-delay: 0.5s;
+    }
+    ul.stacks li:nth-child(7)::after {
+      left: -60vw;
+      transition-delay: 0.6s;
+    }
+
+    ul.stacks li:nth-child(8)::after {
+      left: -70vw;
+      transition-delay: 0.7s;
+    }
+    ul.stacks li:nth-child(9)::after {
+      left: -80vw;
+      transition-delay: 0.8s;
+    }
+    ul.stacks li:nth-child(10)::after {
+      left: -90vw;
+      transition-delay: 0.9s;
+    }
+
+    ul.stacks li {
+      transition: 1s transform ease-in-out;
+    }
+
+    ul.stacks:hover li {
+      transform: translatey(-100vh);
+    }
+  </style>
+</head>
+<body>
+  <ul class="stacks">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</body>
+<script>
+
+</script>
+</html>
