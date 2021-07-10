@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IOS开关按钮</title>
+  <style>
+    /* 在根节点上定义css变量 */
+    /* 学习一下人家的命名，这™才叫专业 */
+    :root {
+      /* 定义整个按钮的宽度 */
+      --button-width: 500px;
+      /* 定义整个按钮的高度 */
+      --button-height: 295px;
+      /* 圆的直径 */
+      --toggle-diameter: 255px;
+      /* 按钮与圆形的间距 */
+      --button-toggle-offset: calc((var(--button-height) - var(--toggle-diameter)) / 2);
+      /* 圆形的阴影偏移量 */
+      --toggle-shadow-offset: 10px;
+      /* 圆形长按变胶囊状的宽度 */
+      --toggle-wider: 333px;
+      
+      --color-grey: #E9E9E9;
+      --color-dark-grey: #39393D;
+      --color-green: #30D158;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    span {
+      display: inline-block;
+      width: var(--button-width);
+      height: var(--button-height);
+      background-color: var(--color-grey);
+      /* 其实这里的半径使用得挺有学问的，有空去研究研究 */
+      border-radius: calc(var(--button-height) / 2);
+      /* 这里使用relative一看就是为了搭配伪元素的position：absolute来使用的 */
+      position: relative;
+      /* 这里的all 就用得非常的巧妙 */
+      transition: .3s all ease-in-out;
+    }
+
+    span::after {
+      content: '';
+      display: inline-block;
+      width: var(--toggle-diameter);
+      height: var(--toggle-diameter);
+      background-color: #fff;
+      /* 其实可以思考一下，这里为什么不用50% 而是直径除以2呢? */
+      border-radius: calc(var(--toggle-diameter) / 2);
+      position: absolute;
+      top: var(--button-toggle-offset);
+      /* 横坐标的位移是通过translateX来实现的，其实要习惯于这种写法 */
+      transform: translateX(var(--button-toggle-offset));
+      /* 也不知道这个阴影有什么讲究没 */
+      box-shadow: var(--toggle-shadow-offset) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, .10);
+      /* 这里的all 就用得非常巧妙 */
+      transition: .3s all ease-in-out;
+    }
+
+    /* + 元素相邻的同胞元素 */
+    /* 这种checked 搭配用法要好好研究研究 */
+    input[type="checkbox"]:checked + span {
+      background-color: var(--color-green);
+    }
+
+    input[type="checkbox"]:checked + span::after {
+      transform: translateX(calc(var(--button-width) - var(--toggle-diameter) - var(--button-toggle-offset)));
+      box-shadow: calc(var(--toggle-shadow-offset) * -1) 0 calc(var(--toggle-shadow-offset) * 4) rgba(0, 0, 0, .10);
+    }
+
+    input[type="checkbox"] {
+      display: none;
+    }
+
+    input[type="checkbox"]:active + span::after {
+      width: var(--toggle-wider);
+    }
+
+    input[type="checkbox"]:active + span::after {
+      transform: translateX(calc(var(--button-width) - var(--toggle-wider) - var(--button-toggle-offset)));
+    }
+
+        /* prefers-color-scheme 用来判断系统是否是启用了深色模式 */
+    @media(prefers-color-scheme: dark) {
+      body {
+        background-color: #1C1C1E;
+      }
+      
+      span {
+        background-color: var(--color-dark-grey);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- label 和 checkout 搭配的逻辑应该再多了解了解 -->
+  <label for="toggle">
+    <input type="checkbox" id='toggle'>
+    <span></span>
+  </label>
+</body>
+</html>
