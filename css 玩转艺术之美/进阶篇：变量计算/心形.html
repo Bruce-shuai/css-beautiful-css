@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>心形</title>
+  <style>
+    .heart-loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
+      height: 200px;
+    }
+    .heart-loading ul {
+      display: flex;
+      justify-content: space-between;
+      width: 150px;
+      height: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="heart-loading">
+    <ul style="--line-count: 9">
+      <!-- 这个v-for: key用法是什么呢 -->
+      <li v-for="v in 9": key="v": class="`line-${v}`"></li>
+    </ul>
+  </div>
+</body>
+</html>

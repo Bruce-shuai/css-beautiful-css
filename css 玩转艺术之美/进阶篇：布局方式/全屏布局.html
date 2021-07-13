@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全屏布局</title>
+  <style>
+    /* 这个absolute的用法其实是真的巧妙 */
+    .fullscreen-layout {
+      position: relative;
+      width: 400px;
+      height: 400px;
+    }
+
+    header,
+    footer,
+    main {
+      /* 这个左右拉伸是真的挺秀的 */
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+
+    header {
+      top: 0;
+      height: 50px;
+      background-color: #f66;
+    }
+
+    footer {
+      bottom: 0;
+      height: 50px;
+      background-color: #66f;
+    }
+
+    main {
+      top: 50px;
+      bottom: 50px;
+      background-color: #3c9;
+    }
+  </style>
+</head>
+<body>
+  <div class="fullscreen-layout">
+    <header></header>
+    <main></main>
+    <footer></footer>
+  </div>
+</body>
+</html>

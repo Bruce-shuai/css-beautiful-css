@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>两列布局</title>
+  <style>
+    .two-column-layout {
+      width: 400px;
+      height: 400px;
+    }
+    /* 我对于float的理解还不够深呀 */
+    /* 对于overflow:hidden 以及 BFC区域与外界隔离 这两个内容的理解都不够深 */
+    .left {
+      float: left;
+      width: 100px;
+      /* 为什么这里的高度要设置成百分百，这个也是值得思考的问题 */
+      height: 100%;
+      background-color: #f66;
+    }
+    .right {
+      margin-left: 100px;
+      height: 100%;
+      background-color: #66f;
+    }
+  </style>
+</head>
+<body>
+  <div class="two-column-layout">
+    <div class="left"></div>
+    <div class="right"></div>
+  </div>
+</body>
+</html>
