@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    header {
+      height: 160px;
+      position: relative;
+      overflow: hidden;
+
+      --percentage: 0.5;
+    }
+
+    header .view, header .tree {
+      position: absolute;
+      /* 这是将上下左右都变为0？   */
+      /* 这里的上下左右拉动 应该是用来搭配absolute的 */
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    header img, header video {
+      position: absolute;
+      display: block;
+      width: 120%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    header .morning {
+      z-index: 20;
+      /* 图片会在--percentage在0.25时开始逐渐变为透明 */
+      opacity: calc(1 - (var(--percentage) - 0.25) / 0.25);
+    }
+
+    header .afternoon {
+      z-index: 10;
+      /* 图片会在--percentage在0.5时开始逐渐变为透明 */
+      /* 似乎opacity 设置为1之上就还是为1 */
+      opacity: calc(1 - (var(--percentage) - 0.5) / 0.5);
+    }
+
+    header .view {
+      /* 艹，这招神奇 */
+      transform: translateX(calc(var(--percentage) * 100px));
+    }
+
+    header .tree {
+      transform: translateX(calc(var(--percentage) * 50px));
+      /* 这里的filter 应该找个时间好好了解了解才行 */
+      filter: blur(3px);
+    }
+
+    /* 通过调整图片的透明度来实现各类图片的显现 */
+
+    /* header .view,
+    header .tree,
+    header .morning,
+    header .afternoon {
+      transition: .2s all ease-in;
+    }
+
+    header.morning .view,
+    header.morning .tree,
+    header.morning .morning,
+    header.morning .afternoon {
+      transition: none;
+    } */
+
+
+    /* 窗框积雪 在最后出现 */
+    header .window-cover {
+      opacity: calc((var(--percentage) - 0.7) / 0.7);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="view">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-view-1.jpg" class="morning" alt="">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-view-2.jpg" class="afternoon" alt="">
+      <!-- 晚上的背景是webm的影片格式，用<video>标签加入 -->
+      <!-- 这个webm格式其实可以好好再研究研究，video的用法在苹果官网是非常喜欢使用的 -->
+      <!-- autoplay loop muted 都有各自的用法，需好好记住才行 -->
+      <video autoplay loop muted>
+        <!-- 这里有动画是因为火炉其实一直是在闪闪发光 -->
+        <source src="https://assets.codepen.io/2002878/bilibili-winter-view-3.webm" type="video/webm" alt="">
+      </video>
+      <!-- 这张照片是用来干什么的呢？ -->
+      <!-- 窗框积雪效果？ -->
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-view-3-snow.png" class="window-cover" alt="">
+    </div>
+    
+    <div class="tree">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-1.png" class="morning" alt="">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-2.png" class="afternoon" alt="">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-3.png" class="evening" alt="">
+    </div>  
+  </header>
+</body>
+<script>
+  let startingPoint;
+  const header = document.querySelector('header');
+
+  // mouseenter 是一个什么事件了呢？ 鼠标进入事件
+  header.addEventListener('mouseenter', e => {
+    // console.log('e1', e.clientX);
+    startingPoint = e.clientX;     //  这个事件的e.clientX 和 下一个事件的e.clientX 似乎值一样
+  })
+
+  // 这个是鼠标移开事件
+  header.addEventListener('mouseout', e => {
+    header.style.setProperty('--percentage', 0.5);
+  })
+
+
+  header.addEventListener('mousemove', e => {
+    // console.log('e2', e.clientX);
+    let percentage = (e.clientX - startingPoint) / window.outerWidth + 0.5;
+    // 通过这个操作，--percentage 已经被放在header里面了吗？  变量--percentage是可以在全局使用的吗？
+    header.style.setProperty('--percentage', percentage)
+  })
+</script>
+</html>

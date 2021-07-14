@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>冬季图</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    header {
+      position: relative;
+      height: 160px;
+      /* 为什么加了overflow:hidden 和 没有加 区别感觉挺大的 */
+      overflow: hidden;
+    }
+
+    header .view, header .tree {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    header .img, header video {
+      position: absolute;
+      display: block;
+      width: 120%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="view">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-view-1.jpg" class="morning" alt="">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-view-2.jpg" class="afternoon" alt="">
+      <!--  autoplay 就是自动播放的意思 loop 就是不断重复的意思 muted 是静音的意思 -->
+      <video autoplay loop muted>
+        <source src="https://assets.codepen.io/2002878/bilibili-winter-view-3.webm" type="video/webm" alt="">
+      </video>
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-view-3-snow.png" class="window-cover" alt="">
+    </div>
+    <div class="tree">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-1.png" class="morning" alt="">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-2.png" class="afternoon" alt="">
+      <img src="https://assets.codepen.io/2002878/bilibili-winter-tree-3.png" class="evening" alt="">
+    </div>
+  </header>
+</body>
+</html>

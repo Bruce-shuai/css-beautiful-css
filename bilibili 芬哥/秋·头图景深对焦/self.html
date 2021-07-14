@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    header {
+      height: 230px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header > div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      --offset: 0px;
+      --blur: 2px;
+    }
+
+    header > div > img {
+      /* 这一步细节 说明了图片是行内元素 */
+      display: block;
+      width: 100%;
+      height: 100%;
+      /* 这一步也是真的细节，将图片按比例填充容器 */
+      object-fit: cover;
+
+      /* 这里的变量用得非常好啊 */
+      transform: translateX(var(--offset));
+      /* 注意下这个filter */
+      filter: blur(var(--blur));
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- 6张图片堆叠在一起，可以组成一张完整的图片 -->
+    <!-- 其实有一个问题想思考思考，为什么img 要被div嵌套呢？ -->
+    <div><img src="https://assets.codepen.io/2002878/bilibili-autumn-1.png"></div>
+    <div><img src="https://assets.codepen.io/2002878/bilibili-autumn-2.png"></div>
+    <div><img src="https://assets.codepen.io/2002878/bilibili-autumn-3.png"></div>
+    <div><img src="https://assets.codepen.io/2002878/bilibili-autumn-4.png"></div>
+    <div><img src="https://assets.codepen.io/2002878/bilibili-autumn-5.png"></div>
+    <div><img src="https://assets.codepen.io/2002878/bilibili-autumn-6.png"></div>
+  </header>
+</body>
+<script>
+  const images = document.querySelectorAll('header > div > img');
+
+  document.querySelector('header').addEventListener('mousemove', e => {
+    // e.clientX 指 鼠标相对可视页面横向的距离(从左往右)
+    // console.log('e.clientX', e.clientX);
+    // window.outerWidth 指可视页面的宽度
+    // console.log('window.outerWidth', window.outerWidth);
+    let percentage = e.clientX / window.outerWidth;
+    // percentage 的范围在 0 ~ 1
+    let offset = 10 * percentage;
+    let blur = 20;
+
+    // images.entries() 的用法是什么？  for of 是咋用的呢 与 for in 的区别
+    for (let [index, image] of images.entries()) {
+      offset *= 1.3;
+      // 这个index操作我有点迷
+      let blurValue = (Math.pow((index / images.length - percentage), 2) * blur);
+      // console.log('index', index);
+      // console.log('images.length', images.length);
+      image.style.setProperty('--offset', `${offset}px`);
+      image.style.setProperty('--blur', `${blurValue}px`);
+
+      // console.log('x', index / images.length - percentage);
+    }
+  })
+
+</script>
+</html>
