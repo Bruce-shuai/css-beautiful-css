@@ -7,10 +7,190 @@
   <title>拼图验证码</title>
 
   <style>
-    
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    #captcha {
+      --width: 400px;
+      --height: 260px;
+      --puzzle-width: 80px;
+      --puzzle-height: 80px;
+      --moved: 0px;     /* 不知道这个变量的作用域为什么不是全局的？ */
+
+      /* display: block; */
+      width: var(--width);
+      height: var(--height);
+      border-radius: 4px;
+      /* 竟然默认连高度和宽度都没有 */
+      background-image: url(https://images.unsplash.com/photo-1626271673051-4f13f2d6183d?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzOHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60);
+      /* 填满容器使用cover 这个就非常的实用 */
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      /* 这个阴影搭配就显得非常的厉害 */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    #captcha::before, #captcha::after {
+      position: absolute;
+      content: '';
+      /* 这里的用法就显得非常有魔性了 原来所有属性都可以继承 */
+      display: block;
+      width: inherit;
+      height: inherit;
+      background-image: inherit;
+      /* background-color: blue; */
+      background-size: inherit;
+      background-position: inherit;
+
+      /* 遮罩效果 */
+      /* 这个inset 的四个值应该分别对应的上 右 下 左 */
+      clip-path: inset(
+        calc((var(--height) - var(--puzzle-height)) / 2)
+        var(--puzzle-width)
+        calc((var(--height) - var(--puzzle-height)) / 2)
+        calc(var(--width) - var(--puzzle-width) * 2)
+      );
+
+      -webkit-clip-path: inset(
+        calc((var(--height) - var(--puzzle-height)) / 2)
+        var(--puzzle-width)
+        calc((var(--height) - var(--puzzle-height)) / 2)
+        calc(var(--width) - var(--puzzle-width) * 2)
+      );
+    }
+
+    #captcha::after {
+      /* 有一说一  这个transform真的好用 */
+      transform: translateX(
+        /* 感觉这个宽度的计算似乎是挺有讲究的 */
+        /* 似乎位置都是基于原来图片的位置来排的 */
+        clamp(
+          calc(var(--width) * -1),
+          calc((var(--width) * -1) + var(--moved)),
+          calc(var(--puzzle-width))
+        )
+      );    
+
+      /* tm的这个效果太巧妙了 */
+      transition: .25s all ease-in-out;
+    }
+
+    #captcha:active::after {
+      transition: none;
+    }
+
+    #captcha::before {
+      background-color: rgba(0, 0, 0, .6);
+      /* 这个是什么用法，要好好研究研究 */
+      /* 这一招就可以将半透明的黑色与背景图片混合到一起 */
+      background-blend-mode: multiply;
+    }
+    /* 这个的确运用得好啊 */
+    #handle {
+      /* 说实话，这里的变量运用得太好了 */
+      width: calc(var(--width) + var(--puzzle-width) * 2);
+      height: 30px;
+      border-radius: 18px;
+      background-color: #eee;
+      position: absolute;
+      bottom: -50px;
+      transform: translateX(calc(var(--puzzle-width) * -2));
+      /* 这个inset的用法是啥？ */
+      box-shadow: inset 0px 0px 12px rgba(0, 0, 0, .2);
+      border: 3px solid #ccc;
+    }
+
+    /* 这个就相当于一个按钮 */
+    #handle span {
+      display: block;
+      width: var(--puzzle-width);
+      height: inherit;
+      border-radius: inherit;
+      background-color: #fff;
+      /* 这里弄一个向内和向外的阴影，造出立体的效果 这里的技巧性强啊 */
+      box-shadow: inset 0px 0px 6px rgba(0, 0, 0, .25), 0px 2px 4px rgba(0, 0, 0, .3);
+      position: absolute;
+      /* 说实话，这个用法的确牛逼 */
+      cursor: move;
+      transform: translateX(
+        /* 这里的clamp 运用得太好了 */
+        clamp(
+          0px,
+          var(--moved),
+          calc(var(--width) + var(--puzzle-width))
+        )
+      );
+
+      transition: .25s all ease-in-out;
+    }
+
+    /* 这个active效果是啥，感觉好奇妙啊 */
+    #captcha:active #handle span {
+      transition: none;
+    }
+
+
+    /* 这里通过js添加的类 和 伪元素结合  效果感觉真的挺不错的 */
+    #captcha.passed::before,
+    #captcha.passed::after,
+    #captcha.passed #handle {
+      opacity: 0;
+    }
   </style>
 </head>
 <body>
-
+  <div id="captcha">
+    <div id="handle">
+      <!-- 注意一个问题： 不用伪类元素制作按钮的原因是在js中不能直接监听伪类元素的事件 -->
+      <span></span>
+    </div>
+  </div>
 </body>
+<script>
+  let shouldMove = false; // flag
+  const captcha = document.querySelector('#captcha');
+  const handle = document.querySelector('#handle');
+  const button = document.querySelector('#handle span');
+
+  // 鼠标点下去的时候
+  window.addEventListener('mousedown', e => {
+    shouldMove = true;  
+  })
+
+  // 鼠标移动的时候
+  window.addEventListener('mousemove', e => {
+    if (shouldMove) {
+      // 这个 getBoundingClientRect 用法感觉挺奇妙的
+      // offsetLeft 表示 获取拉动杆与画面左边的位移
+      const offsetLeft = handle.getBoundingClientRect().left;
+      console.log('offsetLeft', offsetLeft);
+      // buttonWidth 获取按钮的宽度
+      const buttonWidth = button.getBoundingClientRect().width;
+      // console.log('buttonWidth', buttonWidth);
+      // 除2的原因是中心点设定到按钮的中间位置
+      captcha.style.setProperty('--moved', `${e.clientX - offsetLeft - buttonWidth / 2}px`)
+    }
+  })
+  // 鼠标放手的时候
+  window.addEventListener('mouseup', e => {
+    if (shouldMove) {
+      // left  是相对于页面边框的距离
+      const finalOffset = e.clientX - handle.getBoundingClientRect().left;
+
+      if (finalOffset >= 430 && finalOffset <= 450) {
+        // pass
+        captcha.classList.add('passed')
+      } else {
+        // failed
+        captcha.style.setProperty('--moved', '0px')
+      }
+      shouldMove = false;
+    }
+  })
+</script>
 </html>
