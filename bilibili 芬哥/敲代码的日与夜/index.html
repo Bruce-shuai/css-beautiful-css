@@ -81,7 +81,6 @@
   <div class="sea"></div>
 </body>
 <script>
-  // 把这些学会了  自己其实可以尝试创造一些东西来
   // 这里搭配的js 也是用得非常的巧妙
   window.addEventListener('mousemove', e => {
     // 查看各参数的效果
@@ -90,6 +89,8 @@
     // 代表当前屏幕显示的宽度
     // console.log('window.innerWidth:', window.innerWidth);
 
+    // console.log('window.outerwidth', window.outerWidth);
+    // console.log('window.innerwidth', window.innerWidth);
     let percentage = (100 - e.clientX / window.innerWidth * 100);
     // 注意这里的细节： clip-path 被 clipPath代替  还有这里灵活使用的模板运算符
     document.querySelector('.sun').style.clipPath = `inset(0px ${percentage}% 0px 0px)`;

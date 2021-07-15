@@ -63,6 +63,7 @@
       offset *= 1.3;
 
       let blurValue = (Math.pow((index / images.length - percentage), 2) * blur);
+      // 感觉自定义的变量就会用到这个属性  setProperty
       image.style.setProperty('--offset', `${offset}px`);
       image.style.setProperty('--blur', `${blurValue}px`)
     

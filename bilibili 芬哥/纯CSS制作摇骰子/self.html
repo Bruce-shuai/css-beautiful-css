@@ -7,17 +7,68 @@
   <title>摇骰子</title>
   <style>
     body {
-      /* 下面这四个其实就是老步骤了 */
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      min-width: none;
+    }
+
+    .dice {
+      background-image: url(https://assets.codepen.io/2002878/random-dice.png);
+      width: 366px;
+      height: 366px;
+      /* animation 后面这个是要带单位的 */
+      animation: .2s steps(5, start) random infinite;
+    }
+
+    @keyframes random {
+      from {
+        background-position: 0% 100%;
+      }
+      to {
+        background-position: 100% 100%;
+      }
+    }
+
+    #dice {
+      display: none;
+    }
+
+    /* 我对于选择器的理解还是不够深啊 */
+    input[type='checkbox']:checked ~ label .dice {
+      /* 将animation 暂停方法 */
+      animation-play-state: paused;
     }
 
 
+    .dice::before {
+      content: '?';
+      background-color: rgba(255, 255, 255, .8);
+      /* 这个用法感觉挺妙的 */
+      width: inherit;
+      height: inherit;
+      display: flex;
+      /* 没想到这里的flex竟然会对 flex 有影响 */
+      justify-content: center;
+      align-items: center;
+      font-size: 320px;
+      font-family: Helvetica;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 60px;
+    }
+
+    input[type='checkbox']:checked ~ label .dice::before {
+      /* 这里的none 是把伪类的东西全部销掉了吗？ */
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <input type="checkout" id="dice">
+  <input type="checkbox" id="dice">
+
+  <label for="dice">
+    <div class="dice"></div>
+  </label>
 </body>
 </html>
