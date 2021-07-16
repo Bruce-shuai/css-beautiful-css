@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    input[type="checkbox"]:checked + label .box {
+      background-color: cyan;
+    }
+
+    #toggler {
+      /* none之后，设置样式都不会占格子 */
+      display: none;
+    }
+
+    .hamburger-container {
+      display: block;
+      width: 20px;
+      height: 20px;
+      position: relative;
+      top: 16px;
+    }
+
+    .hamburger-container span {
+      display: block;
+      position: relative;
+      top: 0;
+      /* 宽度会继承父元素的宽度 */
+      height: 1px;
+      background-color: #fff;
+      transform: rotate(0deg);
+      transition: transform .3s ease-in-out, top .3s ease-in-out .3s;
+    }
+
+    /* :nth-child() 和 :nth-of-type() 二者有什么区别 */
+    .hamburger-container span:nth-child(2) {
+      margin-top: 7px;
+    }
+
+    /* 这个checked 和 + 搭配真的是有点学问的 */
+    #toggler:checked + label .hamburger-container span:nth-child(1) {
+      transform: rotate(45deg);
+      top: 4px;
+      /* 这里的延迟、 top 、逗号 使用得非常细节 */
+      transition: top .3s ease-in-out, transform .3s ease-in-out .3s;
+    }
+
+    #toggler:checked + label .hamburger-container span:nth-child(2) {
+      transform: rotate(-45deg);
+      top: -4px;
+      transition: top .3s ease-in-out, transform .3s ease-in-out .3s;
+    }
+
+    header {
+      background-color: #000;
+      height: 44px;
+      padding: 0 18px;
+    }
+
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-items {
+      background-color: rgba(0, 0, 0, .82);
+      width: 100%;
+      height: 100vh;
+      /* 这里使用absolute 是为什么呢？ */
+      position: absolute;
+      top: 44px;
+      left: 0;
+      /* 这里的scaleY用得太好了 */
+      transform: scaleY(0);
+      transition: transform .3s ease-in-out;
+      /* transform scaleY 预设的中心点在中间 */
+      /* 这里的transform-origin 用得非常的有学问 */
+      transform-origin: 50% 0;
+    }
+
+    #toggler:checked ~ .nav-items {
+      transform: scaleY(1);
+    }
+
+    ul {
+      margin-top: 1em;
+    }
+
+    ul li {
+      list-style: none;
+      color: #fff;
+      font-size: 1.4rem;
+      font-family:Helvetica;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <input type="checkbox" id="toggler">
+    <label for="toggler">
+      <!-- 被label包裹住才能在点击box的时候，input也跟着有反应 -->
+      <div class="hamburger-container">
+        <span></span>
+        <span></span>
+      </div>
+    </label>
+
+    <div class="nav-items">
+      <ul>
+        <li>Home</li>
+        <li>iPhone12</li>
+        <li>iPad Pro</li>
+        <li>iMac</li>
+        <li>MacBook Pro</li>
+      </ul>
+    </div>
+  </header>
+</body>
+</html>
