@@ -6,10 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    input[type="checkbox"]:checked + label .box {
-      background-color: cyan;
-    }
 
+/* 
++(相邻同胞选择器) 元素相邻的同胞元素
+
+~(通用同胞选择器) 元素后面的同胞元素
+
++/~都是作用于当前节点后的同胞节点，但是两者有一个明显的区别，
++是针对紧随该节点的节点，而~是针对后面所有的节点，包括紧随该节点的节点。
+~还可针对一些特定类和选择器的节点，所以其使用性更广泛。
+
++或~ 左边实质是不会受到{} 里面的属性影响
+*/
     #toggler {
       /* none之后，设置样式都不会占格子 */
       display: none;
@@ -31,6 +39,7 @@
       height: 1px;
       background-color: #fff;
       transform: rotate(0deg);
+      /* 这里的延迟.3s 用得不错！ */
       transition: transform .3s ease-in-out, top .3s ease-in-out .3s;
     }
 
@@ -40,6 +49,7 @@
     }
 
     /* 这个checked 和 + 搭配真的是有点学问的 */
+    /* 有了label 后 点击盒子 和 点击input的效果都是一样的 */
     #toggler:checked + label .hamburger-container span:nth-child(1) {
       transform: rotate(45deg);
       top: 4px;
@@ -74,13 +84,15 @@
       left: 0;
       /* 这里的scaleY用得太好了 */
       transform: scaleY(0);
-      transition: transform .3s ease-in-out;
+      transition: transform .3s ease-in-out .3s;
       /* transform scaleY 预设的中心点在中间 */
       /* 这里的transform-origin 用得非常的有学问 */
       transform-origin: 50% 0;
     }
 
     #toggler:checked ~ .nav-items {
+      /* 这个缩放是真的太秀了 */
+      /* Y轴缩放 */
       transform: scaleY(1);
     }
 
@@ -97,6 +109,7 @@
   </style>
 </head>
 <body>
+  <!-- 这里的header 标签用得挺好的 -->
   <header>
     <input type="checkbox" id="toggler">
     <label for="toggler">
