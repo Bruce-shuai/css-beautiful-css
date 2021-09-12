@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      font-size: 16px;
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+      /* 1个em 就等于 当前盒子font-size的大小(font-size 默认16px) */
+      border: 1em skyblue solid;
+    }
+    /* rem: 只基于root(即html的标签)的font-size的em */
+    html {
+      /* font-size: 30px; */    /* iphone6 */
+      font-size: 35px;          /* iphone6 plus */
+    }
+    .box1 {
+      font-size: 20px;
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+      border: 1rem skyblue solid;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <div class="box1"></div>
+</body>
+</html>

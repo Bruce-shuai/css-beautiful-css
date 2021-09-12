@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/global2.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./iconfont/iconfont.css">
+</head>
+<!-- 似乎写样式，都是先把大的格式先写好了，再慢慢调整小的模块  g- m- 这样设置 -->
+<body>
+  <div class="g-ant">
+    <div class="g-ant__sider ">
+      <!-- g-ant-sider__wrap--fixed表示状态是非常有意思的。 并且这里设置的包裹其实很有意义-->
+      <div class="g-ant-sider__wrap g-ant-sider__wrap--fixed">
+        <div class="g-ant-sider__head">
+         <a class='m-logo' href="#">
+           <img src="./static/logo.svg" alt="logo">
+           <h3>Ant Design Pro</h3>
+         </a>
+        </div>
+        <ul class="g-ant-sider__main">
+         <!-- 注意！这里又是以m开头的命名了... -->
+         <li class="m-menu m-menu--selected">
+           <div class="m-menu__title">
+            <i class="iconfont icon-car"></i>
+            <span>Dashboard</span>
+            <i class="iconfont icon-arrowdown"></i>
+           </div>
+            <!-- 子列表  学学人家的命名方式 牛逼 -->
+            <ul class="m-menu__sub">
+              <li>分析页</li>
+              <li class="m-menu__sub--selected">监控页</li>
+              <li>工作台</li>
+            </ul>
+         </li>
+         <li class="m-menu">
+          <div class="m-menu__title">
+            <i class="iconfont icon-printer"></i>
+            <span>表单页</span>
+            <i class="iconfont icon-arrowdown"></i>
+          </div>
+          <ul class="m-menu__sub">
+            <li>基础表单</li>
+            <li>分布表单</li>
+            <li>高级表单</li>
+          </ul>
+         </li>
+         <li class="m-menu">
+          <div class="m-menu__title">
+            <i class="iconfont icon-video"></i>
+            <span>列表页</span>
+            <i class="iconfont icon-arrowdown"></i>
+          </div>
+          <ul class="m-menu__sub">
+            <li>搜索列表</li>
+            <li>查询表格</li>
+            <li>标准列表</li>
+            <li>卡片列表</li>
+          </ul>
+         </li>
+         <li class="m-menu">
+          <div class="m-menu__title">
+            <i class="iconfont icon-check-circle"></i>
+            <span>详情页</span>
+            <i class="iconfont icon-arrowdown"></i>
+          </div>
+          <ul class="m-menu__sub">
+            <li>基础详情页</li>
+            <li>高级详情页</li>
+          </ul>
+         </li>
+         <li class="m-menu">
+          <div class="m-menu__title">
+            <i class="iconfont icon-user"></i>
+            <span>结果页</span>
+            <i class="iconfont icon-arrowdown"></i>
+          </div>
+          <ul class="m-menu__sub">
+            <li>成功页</li>
+            <li>失败页</li>
+          </ul>
+         </li>
+         <li class="m-menu">
+          <div class="m-menu__title">
+            <i class="iconfont icon-error"></i>
+            <span>异常页</span>
+            <i class="iconfont icon-arrowdown"></i>
+          </div>
+          <ul class="m-menu__sub">
+            <li>403</li>
+            <li>404</li>
+            <li>500</li>
+          </ul>
+         </li>
+         <li class="m-menu">
+          <div class="m-menu__title">
+            <i class="iconfont icon-highlight"></i>
+            <span>个人页</span>
+            <i class="iconfont icon-arrowdown"></i>
+          </div>
+          <ul class="m-menu__sub">
+            <li>个人中心</li>
+            <li>个人设置</li>
+          </ul>
+         </li>
+         <li class="m-menu">
+          <div class="m-menu__title">
+            <i class="iconfont icon-wrench"></i>
+            <span>图形编辑页</span>
+            <i class="iconfont icon-arrowdown"></i>
+          </div>
+          <ul class="m-menu__sub">
+            <li>流程编辑器</li>
+            <li>脑图编辑器</li>
+            <li>拓扑编辑器</li>
+          </ul>
+         </li>
+        </ul>
+        <div class="g-ant-sider__foot">
+          <!-- 这里的u-bar 也是用得非常有意思的... -->
+          <i class="iconfont icon-outdent u-bar"></i>
+        </div>
+      </div>
+    </div>
+    <div class="g-ant__main">
+      <div class="g-ant-main__head g-ant-main__head--fixed">
+        <i class="iconfont icon-error"></i>
+        <i class="iconfont icon-read"></i>
+        <i class="iconfont icon-check-circle"></i>
+        <i class="iconfont icon-user"></i>
+        <span>admin</span>
+        <i class="iconfont icon-video"></i>
+      </div>
+      <!-- nth-of-type  和 child 有什么区别 -->
+      <div class="g-ant-main__main">
+        <div class="index-main">
+          <div class="m-card">
+            <!-- 图片单独作为背景和作为img标签有什么区别？ -->
+            <div class="m-card__title">
+              活动实时交易情况
+            </div>
+            <div class="m-card-bg1">
+            </div>
+          </div>
+          <div class="m-card">
+            <div class="m-card__title">
+              活动情况预测
+            </div>
+            <div class="m-card__body">
+              <div class="m-card-bg2"></div>
+            </div>
+          </div>
+          <div class="m-card">
+            <div class="m-card__title">
+              券核效率
+            </div>
+            <div class="m-card-bg3">
+            </div>
+          </div>
+          <div class="m-card">
+            <div class="m-card__title">
+              各品类占比
+            </div>
+            <div class="m-card-bg4">
+            </div>
+          </div>
+          <div class="m-card">
+            <div class="m-card__title">
+              热门搜索
+            </div>
+            <div class="m-card-bg5">
+            </div>
+          </div>
+          <div class="m-card">
+            <div class="m-card__title">
+              资源剩余
+            </div>
+            <div class="m-card-bg6">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="g-ant-main__foot">
+        <p>
+          <a href="#">Ant Design Pro</a>
+          <a href="#"><i class="iconfont icon-github-fill"></i></a>
+          <a href="#">Ant Design</a>
+      </p>
+      <p>
+          <i class="iconfont icon-user"></i> 2021 Produced by Ant Group Experience Technology Department
+      </p>
+      </div>
+    </div>
+  </div>
+  <div class="m-setting">
+    <div class="m-setting__bar">
+      <i class="iconfont icon-setting"></i>
+    </div>
+    <div class="m-setting__item">
+      <h3>主题色</h3>
+      <ul class="m-setting__theme">
+        <li class="u-foxiaolan">
+          <i class="iconfont icon-check"></i>
+        </li>
+        <li class="u-bomu"></li>
+        <li class="u-huoshan"></li>
+        <li class="u-rimu"></li>
+        <li class="u-mingqing"></li>
+        <li class="u-jiguanglv"></li>
+        <li class="u-jikelan"></li>
+        <li class="u-jiangzi"></li>
+      </ul>
+    </div>
+    <div class="m-setting__item">
+      <h3>固定内容</h3>
+      <ul class="m-setting-item__toggle">
+        <li>
+          <span>内容头部</span>
+          <!-- 学习人家的命名 这里是元件命名 以及 j开头表示由js来控制-->
+          <div class="u-switch j-head--fixed">
+            <!-- 这里的命名太棒了 -->
+            <div class="u-switch__handle"></div>
+          </div>
+        </li>
+        <li>
+          <span>侧边菜单</span>
+          <!-- 学习人家的命名 这里是元件命名 -->
+          <div class="u-switch j-sider--fixed">
+            <!-- 这里的命名太棒了 -->
+            <div class="u-switch__handle"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- 人家是如何分辨 g- m- u-的呢？ -->
+    <div class="u-devider">
+
+    </div>
+    <div class="m-setting__item">
+      <h3>显示内容</h3>
+      <ul class="m-setting-item__toggle">
+        <li>
+          <span>内容头部</span>
+          <!-- 学习人家的命名 这里是元件命名 -->
+          <div class="u-switch j-head--show">
+            <!-- 这里的命名太棒了 -->
+            <div class="u-switch__handle"></div>
+          </div>
+        </li>
+        <li>
+          <span>侧边菜单</span>
+          <!-- 学习人家的命名 这里是元件命名 -->
+          <div class="u-switch j-sider--show">
+            <!-- 这里的命名太棒了 -->
+            <div class="u-switch__handle"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="u-mask"></div>
+  <script>
+    const menuTitles = document.querySelectorAll('.m-menu__title');
+    for (let i = 0; i < menuTitles.length; i++) {
+      menuTitles[i].onclick = function() {      // 弄一个匿名函数
+        const parentMenu = this.parentElement;  // 获取父元素
+        parentMenu.classList.toggle('m-menu--selected');  // 这里是没有.的要注意
+
+        // 这里的用法很有意思 值得细细思考
+        if (parentMenu.className.includes('m-menu--selected')) {
+          // 打开状态
+          const arrow = this.querySelector('[class*="icon-arrow"]');
+          arrow.className = 'iconfont icon-arrowup';
+        }
+        else {
+          // 关闭状态
+          const arrow = this.querySelector('[class*="icon-arrow"]');
+          arrow.className = 'iconfont icon-arrowdown';
+        }
+      }
+
+      const bar = document.querySelector('.u-bar');
+      const sider = document.querySelector('.g-ant__sider');
+      bar.onclick = function() {
+        sider.classList.toggle('g-ant__sider--closed');
+      }
+    }
+
+    const menuSubLis = document.querySelectorAll('.m-menu__sub li');
+    for (let i = 0; i < menuSubLis.length; i++) {
+      menuSubLis[i].onclick = function() {
+        this.classList.toggle('m-menu__sub--selected');
+      }
+    }
+    const settingBar = document.querySelector('.m-setting__bar');
+    settingBar.onclick = function() {
+      const parentSetting = this.parentElement;
+      // 增加了我对于js的理解
+      parentSetting.classList.toggle('m-setting--open');
+      // 这里的样式设计得太棒了！
+      if (parentSetting.className.includes('m-setting--open')) {
+        // 这里的样式用得太好了
+        const icon = this.querySelector('i');
+        icon.className = 'iconfont icon-close';
+      } else {
+        const icon = this.querySelector('i');
+        icon.className = 'iconfont icon-setting';
+      }
+    }
+    const themes = document.querySelectorAll('.m-setting__theme>li');
+    for (let i = 0; i < themes.length; i++) {
+      themes[i].onclick = function () {
+        // 这里的用法值得研究研究
+        for (let j = 0; j < themes.length; j++ ) {
+          themes[j].innerHTML = '';
+        }
+        // 为指定容器添加内容
+        this.innerHTML = '<i class="iconfont icon-check"></i>';
+        // 这些接口真的方便
+        const color = getComputedStyle(this).backgroundColor;
+        document.documentElement.style.setProperty('--theme', color)
+      }
+    }
+
+    const headFixed = document.querySelector('.j-head--fixed');
+    const siderFixed = document.querySelector('.j-sider--fixed');
+    const headShow = document.querySelector('.j-head--show');
+    const siderShow = document.querySelector('.j-sider--show');
+    const antMainHead = document.querySelector('.g-ant-main__head');
+    const andSider = document.querySelector('.g-ant-sider__wrap')
+
+    headFixed.onclick = function() {
+      this.classList.toggle('u-switch--closed');
+      antMainHead.classList.toggle('g-ant-main__head--fixed');
+    }
+
+    siderFixed.onclick = function() {
+      this.classList.toggle('u-switch--closed');
+      andSider.classList.toggle('g-ant-sider__wrap--fixed');
+    }
+
+    headShow.onclick = function() {
+      this.classList.toggle('u-switch--closed');
+      antMainHead.classList.toggle('g-ant-main__head--show');
+    }
+
+    siderShow.onclick = function() {
+      this.classList.toggle('u-switch--closed');
+      document.querySelector('.g-ant__sider').classList.toggle('g-ant__sider--closed')
+    }
+  </script>
+</body>
+</html>

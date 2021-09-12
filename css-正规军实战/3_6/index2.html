@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1 {
+      width: 50px;
+      height: 50px;
+      background-color: pink;
+      /* 有了浮动之后，box1 就要高于box2(box2没浮动的前提下)了 */
+      float: left;  
+    }
+    .box2 {
+      width: 150px;
+      height: 150px;
+      background-color: skyblue;
+      /* box2上面有个左浮动，box2 就清除左浮动(清除右浮动没用)
+         但是事实上，box1，box2 的高度是没有受clear影响
+         如果是clear:both 则不管是左浮动还是右浮动都可以进行清理
+      */
+      clear: left;
+    }
+     
+    .box3 {
+      width: 200px;
+      border: 1px black solid;
+    }
+    .box4 {
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+      float: left  ;
+    }
+  </style>
+</head>
+<body>
+  <!-- 上下关系 -->
+  <!-- <div class="box1"></div>
+  <div class="box2"></div> -->
+
+  <!-- 嵌套关系 -->
+  <div class="box3">
+    <div class="box4"></div>
+  </div>
+  <!-- 可以使用bfc解决高度塌陷问题 -->
+  aaaa
+  
+</body>
+</html>

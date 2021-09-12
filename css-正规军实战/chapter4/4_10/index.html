@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .main {
+      width: 500px;
+      height: 300px;
+      background-color: skyblue;
+      display: flex;
+    }
+    .main div {
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+      /* flex-grow: 0; 默认 */
+      /* flex-grow的优先级可大于直接设置盒子宽度 */
+      /* 在只有一个子元素的情况下当比例值大于等于1的时候，就会占满剩余的空间，小于1的时候，就在原来自身宽度的基础上加上剩余空间 * 这个比例值 */
+      flex-grow: 1; 
+      /* 在有多个子元素的情况下 每个子元素的flex-grow 的值进行相对比例划分剩余的空间。如果所有子元素的flex-grow的值加起来都没有1的话，剩余空间就不会全部被分割完 */
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div>1</div>
+  </div>
+</body>
+</html>

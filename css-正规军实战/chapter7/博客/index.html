@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自己写的响应式网页</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./iconfont/iconfont.css">
+  <style>
+    :root{
+      --container: 100%;
+    }
+    body {
+      background-color: #ebebeb;
+    }
+    /* -----------head---------- */
+    .head {
+      display: flex;
+      height: 190px;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #ebebeb;
+      background-color: #fff;
+    }
+    .head img {
+      width: 200px;
+    }
+
+    /* -----------nav---------- */
+    .nav {
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 2px solid #e1e1e1;
+    }
+    .nav ul {
+      display: flex;
+      flex-direction: column;
+    }
+    .nav li {
+      padding: 0 21px;
+      position: relative;
+    }
+    .nav li.active::after {
+      content: '';
+      position: absolute;
+      /* 这个width好像和position是有一定的关系的~ */
+      width: 100%;
+      height: 2px;
+      left: 0;
+      bottom: 0;
+      background-color: #d9823b;
+    }
+    .nav-bar {
+      height: 56px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .nav li a {
+      font-size: 14px;
+      /* 行高非常讲究，可以去了解了解 */
+      line-height: 56px;
+      color: #505050;
+    }
+    input {
+      display: none;
+    }
+
+    input:checked + .nav-list {
+      display: block;
+    }
+
+    .nav-list {
+      display: none;
+      /* 这里的border-box 发挥了大用！！ */
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0 21px;
+      /* background-color:red; */
+    }
+
+    /* -----------main----------- */
+    .main {
+      padding: 0 16px;
+      width: var(--container);
+      display: grid;
+      gap: 20px;
+      justify-content: center;
+      /* 左右居中大法 */
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+    .main-article {
+      background-color: #fff;
+      display: flex;
+      margin: 32px 0;
+      padding: 40px 20px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .main-article h2 {
+      font-size: 34px;
+      font-weight: 400;
+    }
+
+    .main-article span {
+      color: #959595;
+    }
+
+    .main-article p {
+      margin-top: 25px;
+      font-size: 18px;
+      /* line-height的用法值得研究研究 */
+      line-height: 1.5;
+    }
+
+    .main-article button {
+      margin: 30px 0;
+      padding: 10px;
+      border: none;
+      color: #fff;
+      background: #e67e22;
+      /* 这招还是非常巧妙的 */
+      align-self: flex-start;
+    }
+
+    .main-article section {
+      width: 100%;
+      border-top:1px #ebebeb solid;
+      padding-top:20px;
+    }
+    .main-article section a{
+      color: #6f6f6f;
+    }
+
+    .main-statement {
+      background-color: #fff;
+      margin: 32px 0;
+      padding: 40px 20px;
+    }
+    .main-statement h3 {
+      font-size: 20px;
+      width: 80px;
+      font-weight: 400;
+      height: 40px;
+      position: relative;
+    }
+
+    .main-statement h3::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      left: 0;
+      bottom: -1px;
+      background-color: #d9823b;
+    }
+    .main-statement p {
+      /* 这个border的长度似乎要受padding影响 */
+      /* border 与 padding  margin之间的关系 */
+      border-top: 1px solid #cccccc;
+      line-height: 78px;
+      /* margin-top: 30px; */
+    }
+
+    .main-load {
+      background-color: #fff;
+      margin: 32px 0;
+      padding: 40px 20px;
+    }
+    .main-load h3 {
+      font-size: 20px;
+      width: 100%;
+      margin-bottom: 20px;
+      font-weight: 400;
+      height: 40px;
+      border-bottom: 1px solid #ccc;
+      position: relative;
+    }
+
+    .main-load h3::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 1px;
+      left: 0;
+      bottom: -1px;
+      background-color: #d9823b;
+    }
+    .main-load button {
+      width: 100%;
+      margin-top: 10px;
+      height: 40px;
+      border: none;
+      color: #fff;
+      background-color: #d9823b;
+    }
+    .main-tags {
+      background-color: #fff;
+      margin: 32px 0;
+      padding: 40px 20px;
+    }
+    .main-tags h3 {
+      font-size: 20px;
+      width: 100%;
+      margin-bottom: 20px;
+      font-weight: 400;
+      height: 40px;
+      border-bottom: 1px solid #ccc;
+      position: relative;
+    }
+    .main-tags h3::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 1px;
+      left: 0;
+      bottom: -1px;
+      background-color: #d9823b;
+    }
+    .tag-list {
+      display: flex;
+      /* 这里的wrap用得好！ */
+      flex-wrap: wrap;
+    }
+
+    .tag-list li {
+      padding: 5px 10px;
+      border: 1px solid #ebebeb;
+      cursor: pointer;
+      margin:5px;
+    }
+    .tag-list li a {
+      color: #505050;
+    }
+
+    /* -----------foot----------- */
+    .foot {
+      padding: 30px 20px;
+      /* padding: 0 auto; */
+      background-color: #202020;
+    }
+
+    .foot-items {
+      width: var(--container);
+      margin: 0 auto;
+    }
+
+    .foot h3 {
+      font-size: 22px;
+      color: #fff;
+      font-weight: normal;
+      margin-bottom: 20px;
+      font-weight: 400;
+      height: 40px;
+      border-bottom: 1px solid #ccc;
+      position: relative;
+    }
+    .foot h3::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 1px;
+      left: 0;
+      bottom: -1px;
+      background-color: #d9823b;
+    }
+
+    .foot ul {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .foot ul li {
+      margin-right: 20px;
+      margin-bottom: 25px;
+    }
+
+    .foot ul li a {
+      color: #868686;
+    }
+
+    .copyright{
+            background: #111111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+            color: #555555;
+        }
+    /*------------------------ 栅格响应式布局 + grid ------------------------*/
+    .row {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    /* 这个用法是什么呢？ */
+    .row>[class*="col"]{
+      grid-area: auto/auto/auto/span 12;
+    }
+    .row .col-1 {
+      grid-area: auto/auto/auto/span 1;
+    }
+    .row .col-2 {
+      grid-area: auto/auto/auto/span 2;
+    }
+    .row .col-3 {
+      grid-area: auto/auto/auto/span 3;
+    }
+    .row .col-4 {
+      grid-area: auto/auto/auto/span 4;
+    }
+    .row .col-5 {
+      grid-area: auto/auto/auto/span 5;
+    }
+    .row .col-6 {
+      grid-area: auto/auto/auto/span 6;
+    }
+    .row .col-7 {
+      grid-area: auto/auto/auto/span 7;
+    }
+    .row .col-8 {
+      grid-area: auto/auto/auto/span 8;
+    }
+    .row .col-9 {
+      grid-area: auto/auto/auto/span 9;
+    }
+    .row .col-10 {
+      grid-area: auto/auto/auto/span 10;
+    }
+    .row .col-11 {
+      grid-area: auto/auto/auto/span 11;
+    }
+    .row .col-12 {
+      grid-area: auto/auto/auto/span 12;
+    }
+    @media (min-width:752px) {
+
+      .nav-bar {
+        display: none;
+      }
+      .nav-list {
+        display: block;
+      }
+      .nav-list ul{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+      .row .col-sm-1 {
+        grid-area: auto/auto/auto/span 1;
+      }
+      .row .col-sm-2 {
+        grid-area: auto/auto/auto/span 2;
+      }
+      .row .col-sm-3 {
+        grid-area: auto/auto/auto/span 3;
+      }
+      .row .col-sm-4 {
+        grid-area: auto/auto/auto/span 4;
+      }
+      .row .col-sm-5 {
+        grid-area: auto/auto/auto/span 5;
+      }
+      .row .col-sm-6 {
+        grid-area: auto/auto/auto/span 6;
+      }
+      .row .col-sm-7 {
+        grid-area: auto/auto/auto/span 7;
+      }
+      .row .col-sm-8 {
+        grid-area: auto/auto/auto/span 8;
+      }
+      .row .col-sm-9 {
+        grid-area: auto/auto/auto/span 9;
+      }
+      .row .col-sm-10 {
+        grid-area: auto/auto/auto/span 10;
+      }
+      .row .col-sm-11 {
+        grid-area: auto/auto/auto/span 11;
+      }
+      .row .col-sm-12 {
+        grid-area: auto/auto/auto/span 12;
+      }
+    }
+    @media (min-width:976px) {
+
+      /* 这里运用得 就非常巧妙了 */
+      :root {
+        --container: 800px
+      }
+      .row .col-sm-1 {
+        grid-area: auto/auto/auto/span 1;
+      }
+      .row .col-sm-2 {
+        grid-area: auto/auto/auto/span 2;
+      }
+      .row .col-sm-3 {
+        grid-area: auto/auto/auto/span 3;
+      }
+      .row .col-sm-4 {
+        grid-area: auto/auto/auto/span 4;
+      }
+      .row .col-sm-5 {
+        grid-area: auto/auto/auto/span 5;
+      }
+      .row .col-sm-6 {
+        grid-area: auto/auto/auto/span 6;
+      }
+      .row .col-sm-7 {
+        grid-area: auto/auto/auto/span 7;
+      }
+      .row .col-sm-8 {
+        grid-area: auto/auto/auto/span 8;
+      }
+      .row .col-sm-9 {
+        grid-area: auto/auto/auto/span 9;
+      }
+      .row .col-sm-10 {
+        grid-area: auto/auto/auto/span 10;
+      }
+      .row .col-sm-11 {
+        grid-area: auto/auto/auto/span 11;
+      }
+      .row .col-sm-12 {
+        grid-area: auto/auto/auto/span 12;
+      }
+    }
+    @media (min-width:1186px) {
+    /* 这里运用得 就非常巧妙了 */
+    :root {
+      --container: 1200px
+    }
+    .row .col-md-1 {
+      grid-area: auto/auto/auto/span 1;
+    }
+    .row .col-md-2 {
+      grid-area: auto/auto/auto/span 2;
+    }
+    .row .col-md-3 {
+      grid-area: auto/auto/auto/span 3;
+    }
+    .row .col-md-4 {
+      grid-area: auto/auto/auto/span 4;
+    }
+    .row .col-md-5 {
+      grid-area: auto/auto/auto/span 5;
+    }
+    .row .col-md-6 {
+      grid-area: auto/auto/auto/span 6;
+    }
+    .row .col-md-7 {
+      grid-area: auto/auto/auto/span 7;
+    }
+    .row .col-md-8 {
+      grid-area: auto/auto/auto/span 8;
+    }
+    .row .col-md-9 {
+      grid-area: auto/auto/auto/span 9;
+    }
+    .row .col-md-10 {
+      grid-area: auto/auto/auto/span 10;
+    }
+    .row .col-md-11 {
+      grid-area: auto/auto/auto/span 11;
+    }
+    .row .col-md-12 {
+      grid-area: auto/auto/auto/span 12;
+    }
+}
+
+  </style>
+</head>
+<body>
+  <div class="head">
+    <img src="./img/ghost-logo.png" alt="">
+  </div>
+  <div class="nav">
+    <div class="nav-bar">
+      <label for="zhedie-btn">
+        <i class="iconfont icon-zhedie"></i>
+      </label>
+    </div>
+    <input type="checkbox" id="zhedie-btn">
+    <!-- 为什么有的时候写ul li 就没有小圆点 有时候写就有呢？ -->
+    <div class="nav-list">
+      <ul>
+        <li class="active"><a href="#">首页</a></li>
+        <li><a href="#">论坛</a></li>
+        <li><a href="#">快捷手册</a></li>
+        <li><a href="#">中文文档</a></li>
+        <li><a href="#">关于</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="main row">
+    <div class="col-sm-8 .col-md-6">
+      <div class="main-article">
+        <h2>全新的 Ghost 文档上线</h2>
+        <div><span>作者：王赛·2018年11月20日</span></div>
+        <!-- p标签和div标签的区别 -->
+        <p>
+          我们的整个 Ghost 文档 已经全新改版了！并且添加了一些新的补充，包括使用教程和功能集成。 新文档的目标是帮助更多人有效地安装并管理他们发布的内容，并且最大限度地发挥 Ghost 作为一个开源发布平台的灵活性。文档的设计和结构已经修订完毕，我们的改进包括 Ghost 安装和设
+        </p>
+        <button>阅读全文</button>
+        <!-- 看人家写的这个section 有点意思 -->
+        <section>
+            <i class="iconfont icon-wenjianjia"></i>
+            <a href="#">Android</a>，
+            <a href="#">客户端</a>
+        </section>
+      </div>
+      <div class="main-article">
+        <h2>全新的 Ghost 文档上线</h2>
+        <div><span>作者：王赛·2018年11月20日</span></div>
+        <!-- p标签和div标签的区别, 这样多写各种标签是为了减少class的使用吗？ -->
+        <p>
+          我们的整个 Ghost 文档 已经全新改版了！并且添加了一些新的补充，包括使用教程和功能集成。 新文档的目标是帮助更多人有效地安装并管理他们发布的内容，并且最大限度地发挥 Ghost 作为一个开源发布平台的灵活性。文档的设计和结构已经修订完毕，我们的改进包括 Ghost 安装和设
+        </p>
+        <button>阅读全文</button>
+        <!-- 看人家写的这个section 有点意思 -->
+        <section>
+            <i class="iconfont icon-wenjianjia"></i>
+            <a href="#">Android</a>，
+            <a href="#">客户端</a>
+        </section>
+      </div>
+    </div>
+    <div class="col-sm-4 .col-md-3">
+      <div class="main-statement">
+        <h3>声明</h3>
+        <p>Ghost中文版不再继续维护，请去官方下载</p>
+      </div>
+      <div class="main-load">
+        <h3>下载</h3>
+        <button>Ghost最新版</button>
+      </div>
+      <div class="main-tags">
+        <h3>标签云</h3>
+        <ul class="tag-list">
+          <li><a href="#">客户端</a></li>
+          <li><a href="#">Android</a></li>
+          <li><a href="#">jQuery</a></li>
+          <li><a href="#">Ghost 0.7版本</a></li>
+          <li><a href="#">开源</a></li>
+          <li><a href="#">助手函数</a></li>
+          <li><a href="#">客户端</a></li>
+          <li><a href="#">客户端</a></li>
+          <li><a href="#">Android</a></li>
+          <li><a href="#">jQuery</a></li>
+          <li><a href="#">Ghost 0.7版本</a></li>
+          <li><a href="#">开源</a></li>
+          <li><a href="#">助手函数</a></li>
+          <li><a href="#">客户端</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="foot">
+    <div class="foot-items row">
+      <div class="foot-item col-md-4">
+        <h3>友链</h3>
+        <ul>
+          <li><a href="#">Bootstrap中文网</a></li>
+          <li><a href="#">React</a></li>
+          <li><a href="#">Vue.js</a></li>
+          <li><a href="#">Svelte</a></li>
+          <li><a href="#">Preact</a></li>
+          <li><a href="#">Babel</a></li>
+          <li><a href="#">Webpack</a></li>
+          <li><a href="#">Rollup.js</a></li>
+          <li><a href="#">Bootstrap中文网</a></li>
+          <li><a href="#">React</a></li>
+          <li><a href="#">Vue.js</a></li>
+          <li><a href="#">Svelte</a></li>
+          <li><a href="#">Preact</a></li>
+          <li><a href="#">Babel</a></li>
+          <li><a href="#">Webpack</a></li>
+          <li><a href="#">Rollup.js</a></li>
+        </ul>
+      </div>
+      <div class="foot-item col-md-4">
+        <h3>标签云</h3>
+        <ul>
+          <li><a href="#">客户端</a></li>
+          <li><a href="#">Android</a></li>
+          <li><a href="#">jQuery</a></li>
+          <li><a href="#">Ghost 0.7 版本</a></li>
+          <li><a href="#">开源</a></li>
+          <li><a href="#">助手函数</a></li>
+          <li><a href="#">客户端</a></li>
+          <li><a href="#">客户端</a></li>
+          <li><a href="#">Android</a></li>
+          <li><a href="#">jQuery</a></li>
+          <li><a href="#">Ghost 0.7 版本</a></li>
+          <li><a href="#">开源</a></li>
+          <li><a href="#">助手函数</a></li>
+          <li><a href="#">客户端</a></li>
+        </ul>
+      </div>
+      <div class="foot-item col-md-4">
+        <h3>合作伙伴</h3>
+        <ul>
+          <li><a href="#">腾讯</a></li>
+          <li><a href="#">阿里巴巴</a></li>
+          <li><a href="#">百度</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    <p>Copyright © Ghost中文网 | 京ICP备11008151号-11 | 京公网安备11010802014853</p>
+  </div>
+</body>
+</html>

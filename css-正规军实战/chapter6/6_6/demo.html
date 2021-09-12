@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./iconfont/iconfont.css">
+  <link rel="stylesheet" href="./css/reset.css">
+  <style>
+    html {
+      font-size: 26.666667vw;
+    }
+    body {
+      font-size: 16px;
+    }
+    .head {
+      height: 43px;
+      background-color: #ef1b1a;
+      color: #feffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding:0 10px;
+    }
+    .head-user, .head-email {
+      width: 88px;
+    }
+    .head-logo img{
+      height: 22px;
+    }
+    .head-user i, .head-email .icon-youxiang {
+      font-size: 17px;
+    }
+    .icon-yonghu {
+      margin-left: 5px;
+    }
+    .head-email {
+      /* text-align 用法值得研究一下 */
+      text-align: right;
+    }
+    .icon-down-arrow {
+      font-size: 6px;
+    }
+
+    /* 移动端 1px问题  现在移动端可支持小数了 */
+    .nav {
+      height: 46px;
+      padding:0 10px;
+      border-bottom:0.5px solid #ededed;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav li {
+      /* 平均分 */
+      flex-grow: 1;
+      text-align: center;
+      position: relative;
+    }
+
+    .nav li a {
+      color: #383232;
+    }
+    
+    .nav li a:active {
+      color: #f31c21;
+    }
+
+    .nav li a:active::after {
+      content: '';
+      position: absolute;
+      height: 2px;
+      width: 15px;
+      background-color: #ef1917;
+      left: 42%;
+      bottom: -12px;
+    }
+    .nav-sub {
+      position: relative;
+      background-color: #f8f8f8;
+      /* 这里的overflow 用得太好了 */
+    }
+
+    .nav-sub-list {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      /* 这一个属性有点忘了 */
+      grid-auto-rows: 35px;
+      padding: 11px 10px 6px 17px;
+    }
+
+    .nav-sub-list li {
+      height: 35px;
+
+    }
+    .nav-sub-list li a {
+      color: #39342e;
+    }
+
+    .nav-sub__closed {
+      height: 83px;
+      overflow: hidden;
+    }
+
+    /* + 选择器有什么用呢？ */
+    .nav-sub__closed + .nav-sub-arrow {
+      transform: rotate(0deg);
+    }
+    .nav-sub-arrow {
+      position: absolute;
+      font-size: 5px;
+      bottom: 22px;
+      right: 10px;
+      transform: rotate(180deg);
+    }
+
+    .news-item {
+      position: relative;
+      margin: 0 10px;
+    }
+
+    .news h3{
+      margin: 24px 10px 27px 10px;
+      font-size: 18px;
+    }
+
+    .news-item .news-item-title {
+      font-size: 17px;
+      margin-bottom: 12px;
+      width: 295px;
+    }
+
+    .news .news-item .news-item-info {
+      font-size: 12px;
+      color: #acb5be;
+      margin-bottom: 29px;
+    }
+
+    .news .news-item img {
+      width: 100%;
+      margin-bottom: 9px;
+    }
+
+    .news .news-item-open-app {
+      position: absolute;
+      width: 58px;
+      height: 16px;
+      border: 0.5px solid #ffb9bf;
+      color: #ee1a19;
+      font-size: 10px;
+      text-align: center;
+      border-radius: 8px;
+      left: 178px;
+      top: 59px;
+    }
+
+    .little-img {
+      height: 72px;
+      max-width: 116px;
+      /* 这个属性感觉挺厉害的 */
+      object-fit:contain;
+    }
+
+    .flex-news-item {
+      display: flex;
+    }
+    .flex-news-item .news-item-title {
+      width: 229px;
+    }
+  </style>
+</head>
+<body>
+  <!-- text-align 如何使用？ -->
+
+  <!-- 注意命名规范 -->
+  <div class="head">
+    <div class="head-user">
+      <i class="iconfont icon-yonghu"></i>
+    </div>
+    <div class="head-logo">
+      <img src="./img/logo.png" alt="head-logo">
+    </div>
+    <div class="head-email">
+      <i class="iconfont icon-youxiang"></i>
+      邮箱
+      <i class="iconfont icon-down-arrow"></i>
+    </div>
+  </div>
+  <ul class="nav">
+    <!-- 这里的active 是一个亮点 -->
+    <li class="active">
+      <a href="#">
+        要闻
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        推荐
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        原创
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        热点
+      </a>
+    </li>
+  </ul>
+  <div class="nav-sub nav-sub__closed">
+    <!-- 这里的nav-sub_close 感觉用得好好 -->
+    <ul class="nav-sub-list">   
+      <li>
+        <a href="#">新闻</a>
+      </li>
+      <li>
+        <a href="#">抗疫</a>
+      </li>
+      <li>
+        <a href="#">娱乐</a>
+      </li>
+      <li>
+        <a href="#">体育</a>
+      </li>
+      <li>
+        <a href="#">财经</a>
+      </li>
+      <li>
+        <a href="#">图片</a>
+      </li>
+      <li>
+        <a href="#">汽车</a>
+      </li>
+      <li>
+        <a href="#">军事</a>
+      </li>
+      <li>
+        <a href="#">直播</a>
+      </li>
+      <li>
+        <a href="#">房产</a>
+      </li>
+      <li>
+        <a href="#">新闻</a>
+      </li>
+      <li>
+        <a href="#">抗疫</a>
+      </li>
+      <li>
+        <a href="#">娱乐</a>
+      </li>
+      <li>
+        <a href="#">体育</a>
+      </li>
+      <li>
+        <a href="#">财经</a>
+      </li>
+    </ul>
+    <div class="nav-sub-arrow">
+      <i class="iconfont icon-down-arrow"></i>
+    </div>
+  </div>
+  <div class="news">
+    <h3>今日要闻</h3>
+    <div class="news-item">
+      <div class="news-item-title">习近平再发团结抗疫 “中国强音”</div>
+      <div class="news-item-info">央视网 1小时前 879跟贴</div>
+    </div>
+    <div class="news-item">
+      <div class="news-item-title">这些群众关系事, 总书记再次聚焦</div>
+      <div class="news-item-info">央视网 1小时前 166跟贴</div>
+    </div>
+    <div class="news-item">
+      <div class="news-item-title">超6000万次围观！最高捡带新媒体大咖看 “浙” 里</div>
+      <img src="./img/news.jpg" alt="news">
+      <div class="news-item-info">最高人民检察院 昨天 39跟贴</div>
+    </div>
+    <div class="flex-news-item">
+      <div class="news-item">
+        <div class="news-item-title">甘肃马拉松已致20人遇难1人失联 白银市长曾鸣枪开幕</div>
+        <div class="news-item-info">上游新闻 2287跟贴</div>
+        <div class="news-item-open-app">打开APP</div>
+      </div>
+      <img src="./img/news2.jpg" alt="news2" class="little-img">
+    </div>
+    <div class="flex-news-item">
+      <div class="news-item">
+        <div class="news-item-title">男子一人保护了52户家庭 有邻居偷偷帮他交1年物业费</div>
+        <div class="news-item-info">杭州网 1.9万跟贴</div>
+        <div class="news-item-open-app">打开APP</div>
+      </div>
+      <img src="./img/news3.jpg" alt="news3" class="little-img">
+    </div>
+  </div>
+</body>
+</html> 

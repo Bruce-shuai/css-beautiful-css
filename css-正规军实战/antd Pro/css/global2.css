@@ -1,0 +1,538 @@
+@charset "utf-8";
+
+/* --------------------重置样式-------------------------------- */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+button,
+input,
+textarea,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+
+/*设置默认字体*/
+body {
+  font-size: 14px;
+  font-style: normal;
+  font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto,
+    helvetica neue, Arial, noto sans, sans-serif, apple color emoji,
+    segoe ui emoji, segoe ui symbol, noto color emoji;
+}
+
+/*字体太小用户体检不好，让small恢复12px*/
+small {
+  font-size: 12px;
+}
+
+h1 {
+  font-size: 18px;
+}
+
+h2 {
+  font-size: 16px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+h4,
+h5,
+h6 {
+  font-size: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover,
+a:active {
+  outline-width: 0;
+  text-decoration: none;
+}
+
+/*重置表格*/
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*重置hr*/
+hr {
+  border: 0;
+  height: 1px;
+}
+
+/*图形图片*/
+img {
+  border-style: none;
+}
+
+img:not([src]) {
+  display: none;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/*下面的操作是针对于html5页面布局准备的，不支持ie6~8以及其他低版本的浏览器*/
+html {
+  /*禁用系统默认菜单*/
+  -webkit-touch-callout: none;
+  /*关闭iphone & Android的浏览器纵向和横向模式中自动调整字体大小的功能*/
+  -webkit-text-size-adjust: 100%;
+}
+
+input,
+textarea,
+button,
+a {
+  /*表单或者a标签在手机点击时会出现边框或彩色的背景区域，意思是去除点击背景框*/
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/*重置html5元素的默认样式*/
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+}
+
+audio:not([controls]),
+video:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+mark {
+  background-color: #ff0;
+  color: #000;
+}
+
+sub,
+sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  outline: 0;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+textarea {
+  overflow: auto;
+}
+
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+/*-----------------通用方法-----------------------*/
+/* 使用变量来实现全局效果改变 */
+:root {
+  /* 几个css文件都可以通用这些样式 */
+  /* css变量挺有意思的 */
+  --theme: #1890ff;
+}
+
+.show {
+  display: block !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+/*-----------------通用布局(g-)-----------------------*/
+
+.g-ant__main {
+  /* 这部分自适应宽度 */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f1f2f6;
+}
+
+.g-ant-main__head {
+  height: 48px;
+  background-color: #fff;
+  box-shadow: 0 5px 5px #e7e8ec;
+  display: flex;
+  align-items: center;
+}
+
+.g-ant-main__head--show {
+  display: none;
+}
+
+.g-ant-main__head .icon-error {
+  margin-left: auto;
+}
+
+.g-ant-main__head .iconfont {
+  /* flex 其实也是可以使用column-gap的 */
+  margin-right: 25px;
+  font-size: 15px;
+}
+
+.g-ant-main__head span {
+  margin-left: -20px;
+  margin-right: 25px;
+}
+
+.g-ant-main__head--fixed {
+  position: sticky;
+  /* sticky 和 fixed 好像有非常大的不同呀！ sticky好像是不会浮动起来的 */
+  top: 0;
+  right: 0;
+}
+
+.g-ant-main__main {
+  flex-grow: 1;
+}
+
+.g-ant-main__foot {
+  margin-top: 70px;
+  margin-bottom: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #868782;
+}
+
+.g-ant-main__foot a {
+  color: inherit;
+  margin: 0 20px;
+}
+
+/*-----------------通用模块(m-)-----------------------*/
+.m-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+.m-card__title {
+  height: 58px;
+  background-color: #fff;
+  border-bottom: 1px solid #f2f2f2;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.m-card__body {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.m-card-bg1,
+.m-card-bg2,
+.m-card-bg3,
+.m-card-bg4,
+.m-card-bg5,
+.m-card-bg6 {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.m-card-bg1 {
+  background-image: url(../static/index-1.jpg);
+}
+.m-card-bg2 {
+  background-image: url(../static/index-2.jpg);
+}
+.m-card-bg3 {
+  background-image: url(../static/index-3.jpg);
+}
+.m-card-bg4 {
+  background-image: url(../static/index-4.jpg);
+}
+.m-card-bg5 {
+  background-image: url(../static/index-5.jpg);
+}
+.m-card-bg6 {
+  background-image: url(../static/index-6.jpg);
+}
+
+/* .m-card img {
+      height 和 width 100% 能实现图片的自适应
+      height: 100%;
+      width: 100%;
+} */
+
+.m-setting {
+  width: 300px;
+  background-color: #fff;
+  /* 定位的魅力值得学一学 */
+  position: fixed;
+  /* 这里的-300px 写得很妙 */
+  right: -300px;
+  top: 0;
+  height: 100vh;
+  z-index: 10;
+}
+
+.m-setting--open {
+  right: 0;
+}
+
+/* 表示open生效时，mask也有效果了 */
+.m-setting--open + .u-mask {
+  display: block;
+}
+
+.m-setting__bar {
+  width: 48px;
+  height: 48px;
+  background-color: var(--theme);
+  border-radius: 2px;
+  /* 这里的定位用得还是蛮不错的 */
+  position: absolute;
+  left: -48px;
+  /* 这里用得妙啊 */
+  top: calc(50% - 24px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon-setting,
+.icon-close {
+  font-size: 24px !important;
+  color: #fff;
+}
+
+.m-setting__item {
+  margin: 52px 16px 0 16px;
+  font-size: 15px;
+}
+
+.m-setting__theme {
+  height: 86px;
+  box-sizing: border-box;
+  padding-top: 32px;
+  padding-bottom: 50px;
+  display: flex;
+  /* flex里也是可以使用column-gap的！ */
+  column-gap: 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.m-setting__theme li {
+  width: 20px;
+  height: 20px;
+  border-radius: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.m-setting-item__toggle {
+  margin-top: 20px;
+  height: 80px;
+}
+
+.m-setting-item__toggle li {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/*-----------------通用元件(u-)-----------------------*/
+
+.u-foxiaolan {
+  background-color: #1890fe;
+}
+
+li .icon-check {
+  color: #fff;
+}
+.u-bomu {
+  background-color: #f5212d;
+}
+.u-huoshan {
+  background-color: #f9541c;
+}
+.u-rimu {
+  background-color: #fbae14;
+}
+.u-mingqing {
+  background-color: #14c2c3;
+}
+.u-jiguanglv {
+  background-color: #52c31d;
+}
+.u-jikelan {
+  background-color: #2f54eb;
+}
+.u-jiangzi {
+  background-color: #722ed1;
+}
+.u-devider {
+  height: 1px;
+  width: 100%;
+  background-color: #f2f2f2;
+  margin-top: 40px;
+}
+
+.u-switch {
+  width: 30px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  box-sizing: border-box;
+  background-color: var(--theme);
+  cursor: pointer;
+}
+
+.u-switch--closed {
+  padding-left: 15px;
+  background-color: #bfbfbf;
+}
+
+.u-switch__handle {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin: 1px;
+}
+
+/* 这里的遮罩很有意思 */
+.u-mask {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  left: 0;
+  top: 0;
+  /* 这里的z-index 和 fixed 搭配得太好了 */
+  /* z-index 什么情况下用 */
+  z-index: 5;
+}
+
+/*-----------------响应式系统-----------------------*/

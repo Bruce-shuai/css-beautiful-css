@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul {
+      display: none;
+    }
+    input {
+      display: none;
+    }
+    input:checked + ul {
+      display: block;
+    }
+    @media (min-width: 700px) {
+      ul {
+        display: block;
+      }
+      span {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <label for="btn">
+    <span>菜单</span>
+  </label>
+  <!-- 由于要使用+选择器 所以 input的位置放在ul的上一个 -->
+  <input type="checkbox" id="btn">
+  <ul>
+    <li>首页</li>
+    <li>教程</li>
+    <li>论坛</li>
+    <li>文章</li>
+  </ul>
+</body>
+</html>

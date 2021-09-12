@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .main {
+      width: 500px;
+      height: 500px;
+      background-color: skyblue;
+      /* flex 在父容器里设置，但针对的是父容器里子元素的排列 */
+      /* 子元素默认是水平排列(沿着主轴排列) */
+      display: flex;   
+      
+      /* 让子元素可以折行。注意，折行也不会折到紧挨着上一行的下面，而是根据父容器的大小来安排下一行的位置(均分父容器高度)，但如果父容器没有高度，则每一个折行都是紧挨着的 */
+      /* flex-wrap: wrap; */
+
+      /* 折行 和 主轴方向改变 这两个搭配起来 很妙 */
+      /* flex-direction: column-reverse; */
+
+      flex-flow: column-reverse wrap;
+    }
+    .main div {
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <!-- 子元素增多 可见在父元素里排列是不换行的(甚至宽度不会溢出，除非最小宽度也放不下的时候会溢出)，子元素尺寸会自适应变化 -->
+    <!-- 如果子元素没有设置宽度，则子元素的宽度是根据自己本身内容来设置的。如果子元素没设置高度，则高度自适应父元素的高度 -->
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+  </div>
+</body>
+</html>

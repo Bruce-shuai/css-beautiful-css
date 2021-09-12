@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .main {
+      width: 500px;
+      height: 200px;
+      background-color: skyblue;
+      display: flex;
+    }
+    /* .main div {
+      width: 600px;
+      height: 100px;
+      background-color: pink; */
+      /* flex-shrink: 1; 自动收缩，跟容器大小相同 */
+      /* flex-shrink: 0; */
+    /* } */
+
+    .main div:nth-of-type(1) {
+      width: 600px;
+      height: 100px;
+      background-color: pink;
+    }
+
+    .main div:nth-of-type(2) {
+      width: 400px;
+      height: 100px;
+      background-color: green;
+    }
+
+    /* 
+      第一个盒子占父容器的宽度是 600 - 3/5 * (600 + 400 - 500)  
+      第二个盒子占父容器的宽度是 400 - 2/5 * (600 + 400 - 500)
+    */
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div>1</div>
+    <div>2</div>
+  </div>
+</body>
+</html>

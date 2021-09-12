@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BiliBili 移动端</title>
+  <link rel="stylesheet" href="./iconfont//iconfont.css">
+  <link rel="stylesheet" href="./css/reset.css">
+  <style>
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 11.467vw;
+      padding: 0 2.667vw;
+    }
+    /* .head-right {
+      display: flex;
+      align-items: center;
+    } */
+    .head-logo {
+      /* 这里来个auto，直接避免了再在外层嵌套一个head-right元素 */
+      margin-right: auto;
+    }
+    .head-logo .icon-BILIBILI_LOGO {
+      color: #fd7198;
+      font-size: 7.733vw;
+      margin-left: 1.867vw;
+    }
+    .head-search .icon-fangdajing {
+      color: #cbcdca;
+      font-size: 4.8vw;
+    }
+
+    .head-login {
+      width: 6.4vw;
+      height: 6.4vw;
+      background-color: #e8e8e8;
+      text-align: center;
+      border-radius: 50%;
+      margin-left: 6.133vw;
+    }
+    .head-login a{
+      /* 此时font-size 为何无法设置大小了? 这是a标签的问题吗？  
+      不是，是在chrome中font-size 最小是3.2vw的显示效果，
+      小于3.2vw被认为是对人类非常不友好的像素效果 */
+      font-size: 2.133vw;
+      color: #ff6897;
+    }
+    .head-app {
+      width: 19.2vw;
+      height: 6.4vw;
+      background-color: #fd729b;
+      text-align: center;
+      margin: 0vw 0.533vw 0vw 5.333vw;
+      border-radius: 1.067vw;
+    }
+    .head-app a {
+      font-size: 3.733vw;
+      color: #fffefc;
+    }
+    .nav {
+      position: relative;
+      margin: 0 2.667vw;
+      height: 9.333vw;
+      display: flex;
+      border-bottom: 0.133vw solid #f3f3f3;
+    }
+    .nav-list {
+      font-size: 3.467vw;
+      display: flex;
+      margin-top: 1.6vw;
+      align-items: center;
+      /* justify-content: space-between; */
+    }
+
+    .nav-list li {
+      margin-left: 1.6vw;
+      margin-right: 6.933vw;
+      position: relative;
+    }
+
+    .nav-list .active a {
+      color: #f87899;
+    }
+
+    .nav-list .active::after {
+      content: '';
+      position: absolute;
+      width: 11.733vw;
+      height: 0.533vw;
+      background-color: #f97398;
+      left: -2.133vw;
+      bottom: -2.133vw;
+    }
+    .nav-list li a {
+      color: #4e5045;
+    }
+
+    .nav-arrow {
+      /* 似乎absolute 是不占位置的！和float 差不多是上层面的东西 */
+      position: absolute;
+      right: 0;
+      top: 3.467vw;
+      padding-left: 6.933vw;
+      background-color: #fff;
+      /* float: right;
+      top: 26.667vw;
+      margin-top: 1.6vw; */
+      /* auto大法真的无敌 */
+      /* margin-left: auto; */
+    }
+    .nav-arrow .icon-arrow-bottom {
+      color: #a9aaaf;
+    }
+
+    .video {
+      margin: 2.133vw 2.667vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      /* 如何限定行高固定高度？ */
+      grid-row: 37.867vw;
+      column-gap: 2.667vw;
+      row-gap: 2.133vw;
+    }
+    .video-item-pic {
+      /* 网格可实现叠加效果, 真的方便和牛逼 */
+      display: grid;
+    }
+    .video-item-pic img {
+      height: 25.867vw;
+      grid-area: 1/1/1/1;
+      border-radius: 0.8vw;
+    }
+    .video-item-pic span {
+      display: flex;
+      color: #fefdff;
+      margin: 0 1.867vw 0.8vw 1.867vw;
+      grid-area: 1/1/1/1;  
+      align-self: flex-end;
+      align-items: center;
+      font-size: 2.933vw;
+    }
+    .video-item-pic span i {
+      font-size: 4vw;
+      margin-right: 1.333vw;
+    }
+    .video-item-pic span .icon-xinxi {
+      /* auto大法无敌, 但似乎必须和flex搭配才行！？ */
+      margin-left: auto;
+    }
+    .video-item-info {
+      margin-top: 1.333vw;
+      font-size: 3.2vw;
+      /* 字体行高问题.. */
+      line-height: 4vw;
+      color: #0e2d2f;
+    }
+  </style>
+</head>
+<body>
+  <div class="head">
+    <div class="head-logo">
+      <i class="iconfont icon-BILIBILI_LOGO"></i>
+    </div>
+    <!-- 实质根本不需要 -->
+    <!-- <div class="head-right">
+      <div class="head-search">
+        <i class="iconfont icon-fangdajing"></i>
+      </div>
+      <div class="head-login">
+        <a href="#">登录</a>
+      </div>
+      <div class="head-app">
+        <a href="#">下载 App</a>
+      </div>
+    </div> -->
+    <div class="head-search">
+      <i class="iconfont icon-fangdajing"></i>
+    </div>
+    <div class="head-login">
+      <a href="#">登录</a>
+    </div>
+    <div class="head-app">
+      <a href="#">下载 App</a>
+    </div>
+  </div>
+  <div class="nav">
+    <!-- 为什么还要嵌套个nav-list -->
+    <ul class="nav-list">
+      <!-- ul 下的li 是没有小圆点的，奇奇怪怪的... -->
+      <!-- 准则是让文字居中对齐，所以ps画辅助线，就要遵守这个规则 -->
+      <li class="active">
+        <a href="#">首页</a>
+      </li>
+      <li>
+        <a href="#">动画</a>
+      </li>
+      <li>
+        <a href="#">番剧</a>
+      </li>
+      <li>
+        <a href="#">国创</a>
+      </li>
+      <li>
+        <a href="#">音乐</a>
+      </li>
+      <li>
+        <a href="#">舞蹈</a>
+      </li>
+    </ul>
+    <div class="nav-arrow">
+      <i class="iconfont icon-arrow-bottom"></i>
+    </div>
+  </div>
+  <ul class="video">
+    <li class="video-item">
+      <div class="video-item-pic">
+        <img src="./img/video1.jpg" alt="video1">
+        <!-- 这里把span的魅力是发挥出来了的... -->
+        <span>
+          <i class="iconfont icon-703bofang-fangxing-xianxing"></i>
+          73.5万
+          <i class="iconfont icon-xinxi"></i>
+          5591
+        </span>
+      </div>
+      <div class="video-item-info">
+        那些语文课本里“已删节内容”
+      </div>
+    </li>
+    <li class="video-item">
+      <div class="video-item-pic">
+        <img src="./img/video2.jpg" alt="video2">
+        <!-- 这里把span的魅力是发挥出来了的... -->
+        <span>
+          <i class="iconfont icon-703bofang-fangxing-xianxing"></i>
+          73.5万
+          <i class="iconfont icon-xinxi"></i>
+          5591
+        </span>
+      </div>
+      <div class="video-item-info">
+        那些语文课本里“已删节内容”那些语文课本里“已删节内容”那些语文课本里“已删节内容”
+      </div>
+    </li>
+    <li class="video-item">
+      <div class="video-item-pic">
+        <img src="./img/video3.jpg" alt="video3">
+        <!-- 这里把span的魅力是发挥出来了的... -->
+        <span>
+          <i class="iconfont icon-703bofang-fangxing-xianxing"></i>
+          73.5万
+          <i class="iconfont icon-xinxi"></i>
+          5591
+        </span>
+      </div>
+      <div class="video-item-info">
+        那些语文课本里“已删节内容”
+      </div>
+    </li>
+    <li class="video-item">
+      <div class="video-item-pic">
+        <img src="./img/video4.jpg" alt="video4">
+        <!-- 这里把span的魅力是发挥出来了的... -->
+        <span>
+          <i class="iconfont icon-703bofang-fangxing-xianxing"></i>
+          73.5万
+          <i class="iconfont icon-xinxi"></i>
+          5591
+        </span>
+      </div>
+      <div class="video-item-info">
+        那些语文课本里“已删节内容”
+      </div>
+    </li>
+    <li class="video-item">
+      <div class="video-item-pic">
+        <img src="./img/video1.jpg" alt="video1">
+        <!-- 这里把span的魅力是发挥出来了的... -->
+        <span>
+          <i class="iconfont icon-703bofang-fangxing-xianxing"></i>
+          73.5万
+          <i class="iconfont icon-xinxi"></i>
+          5591
+        </span>
+      </div>
+      <div class="video-item-info">
+        那些语文课本里“已删节内容”
+      </div>
+    </li>
+  </ul>
+</body>
+</html>

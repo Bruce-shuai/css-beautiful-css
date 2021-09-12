@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测量rem数值及插件使用</title>
+  <!-- vscode工具中的 px to rem 插件 -->
+  <style>
+    body {
+      font-size: 26.66667vw;
+    }
+    /* fn + option + z:对选中的px单位进行rem转换 */
+    /* 我们通photoshop 获取的像素是物理像素，css中设置的是逻辑像素，所以要对量取的物理像素进行除以2 */
+    /* 可以利用蓝湖、PxCook, 获取rem数值 */
+    .head {
+      width: 1.44rem;
+      height: 1.44rem;
+      background-color: red; 
+    }
+    .foot {
+      width: 2rem;
+      margin: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="head"></div>
+</body>
+</html>

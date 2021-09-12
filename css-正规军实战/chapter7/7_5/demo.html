@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 40px;
+      grid-auto-rows: 40px;
+      background-color: pink;
+    }
+    div {
+      grid-area: auto/auto/auto/span 12;
+      border: 1px solid #000
+    }
+    .col-1 {
+      grid-area: auto/auto/auto/span 1;
+      border: 1px solid #000
+    }
+    .col-2 {
+      grid-area: auto/auto/auto/span 2;
+      border: 1px solid #000
+    }
+    .col-3 {
+      grid-area: auto/auto/auto/span 3;
+      border: 1px solid #000
+    }
+    .col-4 {
+      grid-area: auto/auto/auto/span 4;
+      border: 1px solid #000
+    }
+    .col-5 {
+      grid-area: auto/auto/auto/span 5;
+      border: 1px solid #000
+    }
+    .col-6 {
+      grid-area: auto/auto/auto/span 6;
+      border: 1px solid #000
+    }
+    .col-7 {
+      grid-area: auto/auto/auto/span 7;
+      border: 1px solid #000
+    }
+    .col-8 {
+      grid-area: auto/auto/auto/span 8;
+      border: 1px solid #000
+    }
+    .col-9 {
+      grid-area: auto/auto/auto/span 9;
+      border: 1px solid #000
+    }
+    .col-10 {
+      grid-area: auto/auto/auto/span 10;
+      border: 1px solid #000
+    }
+    .col-11 {
+      grid-area: auto/auto/auto/span 11;
+      border: 1px solid #000
+    }
+    .col-12 {
+      grid-area: auto/auto/auto/span 12;
+      border: 1px solid #000
+    }
+
+    /* --------开始响应式------- */
+    @media (min-width: 576px) {
+      .col-sm-1 {
+      grid-area: auto/auto/auto/span 1;
+      border: 1px solid #000
+    }
+    .col-sm-2 {
+      grid-area: auto/auto/auto/span 2;
+      border: 1px solid #000
+    }
+    .col-sm-3 {
+      grid-area: auto/auto/auto/span 3;
+      border: 1px solid #000
+    }
+    .col-sm-4 {
+      grid-area: auto/auto/auto/span 4;
+      border: 1px solid #000
+    }
+    .col-sm-5 {
+      grid-area: auto/auto/auto/span 5;
+      border: 1px solid #000
+    }
+    .col-sm-6 {
+      grid-area: auto/auto/auto/span 6;
+      border: 1px solid #000
+    }
+    .col-sm-7 {
+      grid-area: auto/auto/auto/span 7;
+      border: 1px solid #000
+    }
+    .col-sm-8 {
+      grid-area: auto/auto/auto/span 8;
+      border: 1px solid #000
+    }
+    .col-sm-9 {
+      grid-area: auto/auto/auto/span 9;
+      border: 1px solid #000
+    }
+    .col-sm-10 {
+      grid-area: auto/auto/auto/span 10;
+      border: 1px solid #000
+    }
+    .col-sm-11 {
+      grid-area: auto/auto/auto/span 11;
+      border: 1px solid #000
+    }
+    .col-sm-12 {
+      grid-area: auto/auto/auto/span 12;
+      border: 1px solid #000
+    }
+    }
+    @media (min-width: 768px) {
+      .col-md-1 {
+      grid-area: auto/auto/auto/span 1;
+      border: 1px solid #000
+    }
+    .col-md-2 {
+      grid-area: auto/auto/auto/span 2;
+      border: 1px solid #000
+    }
+    .col-md-3 {
+      grid-area: auto/auto/auto/span 3;
+      border: 1px solid #000
+    }
+    .col-md-4 {
+      grid-area: auto/auto/auto/span 4;
+      border: 1px solid #000
+    }
+    .col-md-5 {
+      grid-area: auto/auto/auto/span 5;
+      border: 1px solid #000
+    }
+    .col-md-6 {
+      grid-area: auto/auto/auto/span 6;
+      border: 1px solid #000
+    }
+    .col-md-7 {
+      grid-area: auto/auto/auto/span 7;
+      border: 1px solid #000
+    }
+    .col-md-8 {
+      grid-area: auto/auto/auto/span 8;
+      border: 1px solid #000
+    }
+    .col-md-9 {
+      grid-area: auto/auto/auto/span 9;
+      border: 1px solid #000
+    }
+    .col-md-10 {
+      grid-area: auto/auto/auto/span 10;
+      border: 1px solid #000
+    }
+    .col-md-11 {
+      grid-area: auto/auto/auto/span 11;
+      border: 1px solid #000
+    }
+    .col-md-12 {
+      grid-area: auto/auto/auto/span 12;
+      border: 1px solid #000
+    }
+    }
+    @media (min-width: 992px) {
+      .col-lg-1 {
+      grid-area: auto/auto/auto/span 1;
+      border: 1px solid #000
+    }
+    .col-lg-2 {
+      grid-area: auto/auto/auto/span 2;
+      border: 1px solid #000
+    }
+    .col-lg-3 {
+      grid-area: auto/auto/auto/span 3;
+      border: 1px solid #000
+    }
+    .col-lg-4 {
+      grid-area: auto/auto/auto/span 4;
+      border: 1px solid #000
+    }
+    .col-lg-5 {
+      grid-area: auto/auto/auto/span 5;
+      border: 1px solid #000
+    }
+    .col-lg-6 {
+      grid-area: auto/auto/auto/span 6;
+      border: 1px solid #000
+    }
+    .col-lg-7 {
+      grid-area: auto/auto/auto/span 7;
+      border: 1px solid #000
+    }
+    .col-lg-8 {
+      grid-area: auto/auto/auto/span 8;
+      border: 1px solid #000
+    }
+    .col-lg-9 {
+      grid-area: auto/auto/auto/span 9;
+      border: 1px solid #000
+    }
+    .col-lg-10 {
+      grid-area: auto/auto/auto/span 10;
+      border: 1px solid #000
+    }
+    .col-lg-11 {
+      grid-area: auto/auto/auto/span 11;
+      border: 1px solid #000
+    }
+    .col-lg-12 {
+      grid-area: auto/auto/auto/span 12;
+      border: 1px solid #000
+    }
+    }
+    @media (min-width: 1200px) {
+      .col-xl-1 {
+      grid-area: auto/auto/auto/span 1;
+      border: 1px solid #000
+    }
+    .col-xl-2 {
+      grid-area: auto/auto/auto/span 2;
+      border: 1px solid #000
+    }
+    .col-xl-3 {
+      grid-area: auto/auto/auto/span 3;
+      border: 1px solid #000
+    }
+    .col-xl-4 {
+      grid-area: auto/auto/auto/span 4;
+      border: 1px solid #000
+    }
+    .col-xl-5 {
+      grid-area: auto/auto/auto/span 5;
+      border: 1px solid #000
+    }
+    .col-xl-6 {
+      grid-area: auto/auto/auto/span 6;
+      border: 1px solid #000
+    }
+    .col-xl-7 {
+      grid-area: auto/auto/auto/span 7;
+      border: 1px solid #000
+    }
+    .col-xl-8 {
+      grid-area: auto/auto/auto/span 8;
+      border: 1px solid #000
+    }
+    .col-xl-9 {
+      grid-area: auto/auto/auto/span 9;
+      border: 1px solid #000
+    }
+    .col-xl-10 {
+      grid-area: auto/auto/auto/span 10;
+      border: 1px solid #000
+    }
+    .col-xl-11 {
+      grid-area: auto/auto/auto/span 11;
+      border: 1px solid #000
+    }
+    .col-xl-12 {
+      grid-area: auto/auto/auto/span 12;
+      border: 1px solid #000
+    }
+    }
+    @media (min-width: 1400px) {
+      .col-xxl-1 {
+      grid-area: auto/auto/auto/span 1;
+      border: 1px solid #000
+    }
+    .col-xxl-2 {
+      grid-area: auto/auto/auto/span 2;
+      border: 1px solid #000
+    }
+    .col-xxl-3 {
+      grid-area: auto/auto/auto/span 3;
+      border: 1px solid #000
+    }
+    .col-xxl-4 {
+      grid-area: auto/auto/auto/span 4;
+      border: 1px solid #000
+    }
+    .col-xxl-5 {
+      grid-area: auto/auto/auto/span 5;
+      border: 1px solid #000
+    }
+    .col-xxl-6 {
+      grid-area: auto/auto/auto/span 6;
+      border: 1px solid #000
+    }
+    .col-xxl-7 {
+      grid-area: auto/auto/auto/span 7;
+      border: 1px solid #000
+    }
+    .col-xxl-8 {
+      grid-area: auto/auto/auto/span 8;
+      border: 1px solid #000
+    }
+    .col-xxl-9 {
+      grid-area: auto/auto/auto/span 9;
+      border: 1px solid #000
+    }
+    .col-xxl-10 {
+      grid-area: auto/auto/auto/span 10;
+      border: 1px solid #000
+    }
+    .col-xxl-11 {
+      grid-area: auto/auto/auto/span 11;
+      border: 1px solid #000
+    }
+    .col-xxl-12 {
+      grid-area: auto/auto/auto/span 12;
+      border: 1px solid #000
+    }
+    }
+  </style>
+</head>
+<body>
+  <!-- <div class="box">
+    <div class="col-3">col-3</div>
+    <div class="col-3">col-3</div>
+    <div class="col-3">col-3</div>
+    <div class="col-3">col-3</div>
+  </div>
+  <div class="box">
+    <div class="col-sm-3">col-sm-3</div>
+    <div class="col-sm-3">col-sm-3</div>
+    <div class="col-sm-3">col-sm-3</div>
+    <div class="col-sm-3">col-sm-3</div>
+  </div>
+  <div class="box">
+    <div class="col-lg-3">col-lg-3</div>
+    <div class="col-lg-3">col-lg-3</div>
+    <div class="col-lg-3">col-lg-3</div>
+    <div class="col-lg-3">col-lg-3</div>
+  </div>
+  <div class="box">
+    <div class="col-xl-3">col-xl-3</div>
+    <div class="col-xl-3">col-xl-3</div>
+    <div class="col-xl-3">col-xl-3</div>
+    <div class="col-xl-3">col-xl-3</div>
+  </div>
+  <div class="box">
+    <div class="col-xxl-3">col-xxl-3</div>
+    <div class="col-xxl-3">col-xxl-3</div>
+    <div class="col-xxl-3">col-xxl-3</div>
+    <div class="col-xxl-3">col-xxl-3</div>
+  </div> -->
+  <div class="box">
+    <div class="col-lg-3 col-sm-2 col-xl-6"></div>
+    <div class="col-xl-6 col-sm-2 col-lg-3"></div>
+    <div class="col-sm-2 col-lg-3 col-xl-6"></div>
+    <div class="col-sm-2 col-lg-3 col-xl-6"></div>
+  </div>
+</body>
+</html>

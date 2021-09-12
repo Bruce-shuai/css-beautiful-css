@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #96cde9;
+    }
+    .main {
+      display: flex;
+      min-height: 100vh;
+    }
+    /* 到底宽度是怎么继承的  div 标签？ */
+    .main div:nth-child(1), .main div:nth-child(3){
+      width: 100px;
+      height: 100px;
+      background-color: #f6c3cb;
+      margin: auto 0;
+    }
+    .main div:nth-child(2) {
+      background-color: #bffb5b;
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+  </div>
+</body>
+</html>

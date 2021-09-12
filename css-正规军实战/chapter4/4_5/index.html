@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .main {
+      width: 500px;
+      height: 500px;
+      background-color: skyblue;
+      display: flex;   
+      flex-wrap: wrap;
+      /* 针对只有一行布局(不折行)的情况下，align-content 是没有效果的 所以只要加上 flex-wrap: wrap 就可以生效了 */
+      /* align-content: flex-end; */
+      /* align-content: stretch;  这个是默认值，用于拉伸容器高度,只要子元素没设置高度，则子元素会被拉伸到父容器的高度里，如果没有选这个stretch，则子元素的高度和自己本身的内容相关 */
+      /* align-content: center; */
+    
+      align-items: center;
+    }
+    .main div {
+      width: 100px;
+      /* height: 100px; */
+      background-color: pink;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+  </div>
+</body>
+</html>

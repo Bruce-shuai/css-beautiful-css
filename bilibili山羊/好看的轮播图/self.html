@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>好看的轮播图</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: rgba(206, 182, 182, 0.637);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .imgs {
+      position: relative;
+      width: 650px;
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    .left-img {
+      width: 400px;
+      height: 500px;
+      transition: .4s;
+      background-size: cover;
+    }
+
+    .right-imgs {
+      width: 200px;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      /* 小图片上移 */
+      transform: translate(0,-50px);
+    }
+
+    .little-imgs {
+      position: relative;
+      width: 200px;
+      height: 90px;
+      transition:.5s;
+      overflow: hidden;
+    }
+
+    .little-imgs img {
+      position: absolute;
+      width: 200px;
+      transform: translate(0,-50px);
+      transition: .5s;
+    }
+    /* 注意，这里的.是没有距离的 */
+    .little-imgs.img-to-left {
+      /* 这里是透明 */
+      opacity: 0;
+      transform: translateX(-250px);
+    }
+
+    /* 这里的hover带动img用得好 */
+    .little-imgs:hover img {
+      opacity: 0;
+      transform: translateX(-250px);
+    }
+  </style>
+</head>
+<body>
+  <div class="imgs">
+    <div class="left-img"></div>
+    <div class="right-imgs">
+      <div class="little-imgs img-to-left"><img src="1.jpg" alt=""></div>
+      <div class="little-imgs"><img src="2.jpg" alt=""></div>
+      <div class="little-imgs"><img src="3.jpg" alt=""></div>
+      <div class="little-imgs"><img src="4.jpg" alt=""></div>
+      <div class="little-imgs"><img src="5.jpg" alt=""></div>
+    </div>
+  </div>
+  <script>
+    // 获取左边大图的元素
+    let leftImg = document.querySelector('.left-img');
+    let littleImgs = document.querySelectorAll('.little-imgs');
+
+    // console.log('littleImgs', littleImgs);
+    let time;
+    let index = 0;
+
+    // 设置一个重置函数
+    // let reset = function() {
+    //   littleImgs.map(littleImg => littleImg.className='little-imgs');
+    // }
+
+    let reset = function() {
+      for(let i = 0; i < littleImgs.length; i++) {
+        littleImgs[i].className='little-imgs'
+      }
+    }
+    // 设置一个选中函数
+    let select = function() {
+      reset();
+      // console.log('littleImgs', littleImgs);
+      console.log('index', index);
+      console.log('littleImgs', littleImgs[0])
+      littleImgs[index].className = "little-imgs img-to-left";
+    }
+                                                                          
+    // 设置启动轮播图的时间函数
+    let timeFunc = () => {
+      time = setInterval(() => {
+        select();
+        index += 1;
+        leftImg.style.backgroundImage = "url('"+[index]+".jpg')";
+        if (index === 5) {
+          index = 0;
+          console.log('0index', index);
+        };   
+      }, 1500)
+    }
+
+    // littleImgs.map((littleImg, i) => {
+    //   littleImg.onmousemove = function() {
+    //     leftImg.style.backgroundImage = "url('" + [i + 1] + "')";
+    //   }
+    //   reset();
+    //   clearInterval(time);
+    //   index = i + 1;
+    //   timeFunc();
+    // })
+    for(let i = 0; i < littleImgs.length; i++) {
+      littleImgs[i].onmousemove = function() {
+        leftImg.style.backgroundImage = "url('" + [i + 1] + "')";
+      }
+      reset();
+      clearInterval(time);
+      index = i + 1;
+      timeFunc();
+    }
+    timeFunc();
+  </script>
+</body>
+</html>

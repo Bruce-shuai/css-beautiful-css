@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .main {
+      width: 500px;
+      height: 500px;
+      background-color: skyblue;
+      display: flex;   
+      /* 默认是start */
+      /* justify-content: start;  */
+      justify-content: flex-end;
+      /* space-around  子元素自个提供的左右空间是等大的 */
+      /* space-between 父容器左右两边的子元素贴到父容器左右两边的边框 */
+      /* space-evenly  子元素的间距完全相等。 和 space-around 是有区别的 */
+    }
+    .main div {
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+  </div>
+</body>
+</html>

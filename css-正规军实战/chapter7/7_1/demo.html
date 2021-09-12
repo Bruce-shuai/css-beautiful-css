@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* @media print {
+      .box {
+        color: red;
+      }
+    } */
+    @media (min-width: 700px) {
+      /* 大于宽度700 才会显示下面的效果 */
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+      }
+    }
+
+    /* 横竖屏媒体特性 */
+    @media (orientation: landscape) {
+      .box {
+        width: 400px;
+        height: 200px;
+        background-color: yellow;
+      }
+    }
+
+    @media screen and (min-width:700px) and (max-width: 1200px) {
+      .box {
+        width: 400px;
+        height: 200px;
+        background-color: blue;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="box">abcdefghijklmn</div>
+</body>
+</html>

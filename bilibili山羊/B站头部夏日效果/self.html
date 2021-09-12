@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B站夏日头部</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+    }
+    .shell {
+      width: 100%;
+      height: 162px;
+      /* 这里的flex起到一个什么作用呢 */
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <video loop autoplay src="81909048-c89a-4106-880c-175d52c70140.mp4" class="video"
+      style="height: 100%;transform: translate(36px,-8px);"
+    ></video>
+  </div>
+  <script>
+    const shell = document.querySelector('.shell');
+    const video = document.querySelector('.video');
+    // mouseenter 会在鼠标进入图标的时候使用
+    shell.addEventListener('mouseenter', function(e){
+      // 这里的this 是咋来的？ window? 是不是这里不能用箭头函数哦？ 
+      // 如果是箭头函数，那么this 指向的是window  如果是普通函数 this指向的是shell 这个dom
+      // console.log('this', this);
+      this.x = e.clientX;
+      // 为什么要在这里设置一个none呢？ 不设置，则一直会锁定为 video.style.transition = .3 +'s';
+      video.style.transition = 'none';
+    })
+      // 会在游标在图片上移动时触发
+    shell.addEventListener('mousemove', function(e) {
+      this._x=e.clientX;
+      const disx = this._x-this.x    // 相对位移
+      const move = 36 - disx/-20
+      video.style.transform = `translate(${move}px,-8px)`
+    })
+      // 会在游标离开图片时触发
+    shell.addEventListener('mouseleave',function(e) {
+      // transition 用法？  这里是用了默认值？ 过渡默认是ease
+      video.style.transition = .3 +'s';
+      // 这里是位置还原
+      video.style.transform = 'translate(36px,-8px)'
+    })
+  </script>
+</body>
+</html>

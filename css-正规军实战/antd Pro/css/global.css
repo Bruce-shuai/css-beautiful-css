@@ -1,0 +1,433 @@
+@charset "utf-8";
+
+/* --------------------重置样式-------------------------------- */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+button,
+input,
+textarea,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+
+/*设置默认字体*/
+body {
+  font-size: 14px;
+  font-style: normal;
+  font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto,
+    helvetica neue, Arial, noto sans, sans-serif, apple color emoji,
+    segoe ui emoji, segoe ui symbol, noto color emoji;
+}
+
+/*字体太小用户体检不好，让small恢复12px*/
+small {
+  font-size: 12px;
+}
+
+h1 {
+  font-size: 18px;
+}
+
+h2 {
+  font-size: 16px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+h4,
+h5,
+h6 {
+  font-size: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover,
+a:active {
+  outline-width: 0;
+  text-decoration: none;
+}
+
+/*重置表格*/
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*重置hr*/
+hr {
+  border: 0;
+  height: 1px;
+}
+
+/*图形图片*/
+img {
+  border-style: none;
+}
+
+img:not([src]) {
+  display: none;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/*下面的操作是针对于html5页面布局准备的，不支持ie6~8以及其他低版本的浏览器*/
+html {
+  /*禁用系统默认菜单*/
+  -webkit-touch-callout: none;
+  /*关闭iphone & Android的浏览器纵向和横向模式中自动调整字体大小的功能*/
+  -webkit-text-size-adjust: 100%;
+}
+
+input,
+textarea,
+button,
+a {
+  /*表单或者a标签在手机点击时会出现边框或彩色的背景区域，意思是去除点击背景框*/
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/*重置html5元素的默认样式*/
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+}
+
+audio:not([controls]),
+video:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+mark {
+  background-color: #ff0;
+  color: #000;
+}
+
+sub,
+sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  outline: 0;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+textarea {
+  overflow: auto;
+}
+
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+/*-----------------通用方法-----------------------*/
+
+.show {
+  display: block !important;
+}
+.hide {
+  display: none !important;
+}
+
+/*-----------------通用布局(g-)-----------------------*/
+
+.g-ant {
+  display: flex;
+}
+.g-ant__sider {
+  /* 表示失去了flex失去了自动收缩功能, 防止折叠侧边栏的时候出现问题 */
+  flex-shrink: 0;
+  background-color: #00152a;
+  /* 这里填的是min-height 而非 height。不能设置具体的高度，从而实现flex等高布局的效果... */
+  min-height: 100vh;
+  width: 208px;
+}
+
+.g-ant-sider__wrap {
+  color: #fff;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.g-ant-sider__wrap--fixed {
+  position: fixed;
+  /* 固定定位的作用可以再查查 似乎已经脱离普通层面了 */
+  left: 0;
+  top: 0;
+  width: inherit;
+  overflow: hidden;
+}
+.g-ant__sider--closed {
+  width: 48px;
+  overflow: hidden;
+}
+
+.g-ant-sider__head {
+  flex-shrink: 0;
+}
+
+.g-ant-sider__main {
+  /* margin-top: 13px; */
+  /* flex-grow 无敌大法 */
+  flex-grow: 1;
+  /* 这个overflow：hidden auto 产生滚动条 这招是真的牛逼 */
+  overflow: hidden auto;
+}
+/* 自定义滚动条 */
+.g-ant-sider__main::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.g-ant-sider__main::-webkit-scrollbar-thumb {
+  background: #51606d;
+  border-radius: 3px;
+}
+.g-ant-sider__main::-webkit-scrollbar-track {
+  background: #263849;
+  border-radius: 3px;
+}
+
+.g-ant-sider__foot {
+  height: 34px;
+  padding: 0 15px;
+
+  /* 使用fixed的条件是啥，为啥我一用，这个元素直接消失了？ 用bottom 和 left 才能显示出来 而且层面要升高 */
+  /* position: fixed;
+  bottom: 0;
+  left: 0; */
+  /* 感觉用sticky要好一点，看看sticky 和 fixed的区别是什么...??? */
+  /* position: sticky;
+  bottom: 0;
+  background-color: #00152a; */
+  /* flex 和 position 搭配在一起用也是极好的 */
+  flex-shrink: 0;
+  /* display: flex;
+  align-items: center; */
+}
+
+/*-----------------通用模块(m-)-----------------------*/
+/* 有了m-logo 整个逻辑清晰了好多 */
+.m-logo {
+  display: flex;
+  align-items: center;
+  padding-top: 14px;
+}
+
+.m-logo img {
+  width: 33px;
+  flex-shrink: 0;
+}
+
+.m-logo h3 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: normal;
+  margin-left: 10px;
+  /* 似乎要实现折叠的话，每层都要有flex-shrink: 0; */
+  flex-shrink: 0;
+}
+
+.g-ant__sider--closed .m-logo {
+  padding: 16px 8px;
+}
+.m-menu {
+  font-size: 14px;
+  display: flex;
+  color: #81878f;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.m-menu__title {
+  display: flex;
+  /* 注意一个问题： flex-shrink 和 justify-content: center; 
+  搭配在一起使用的时候一定要注意。尽量二者就不要搭配在一起使用 */
+  /* justify-content: center; */
+
+  align-items: center;
+  height: 46px;
+  padding: 0 20px;
+}
+.m-menu .iconfont {
+  font-size: 17px;
+}
+.m-menu span {
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+.m-menu .icon-arrowdown,
+.m-menu .icon-arrowup {
+  margin-left: auto;
+}
+
+.m-menu__sub {
+  display: none;
+  color: #81878f;
+  flex-direction: column;
+}
+.m-menu--selected {
+  color: #fff;
+}
+.m-menu__sub--selected {
+  color: #fff;
+  background-color: var(--theme);
+}
+.m-menu--selected .m-menu__sub {
+  display: flex;
+  color: #81878f;
+  flex-direction: column;
+}
+.m-menu__sub li {
+  height: 40px;
+  padding-left: 48px;
+  font-size: 14px;
+  /* flex 也方便让文字居中 */
+  display: flex;
+  align-items: center;
+}
+
+.g-ant__sider--closed .m-menu__title {
+  transform: translateX(-8px) scale(1.5);
+}
+
+.g-ant__sider--closed .m-menu__sub {
+  display: none;
+}
+/*-----------------通用元件(u-)-----------------------*/
+
+/* 要加点优先级 才方便设置icon-outdent的大小 */
+/* i标签是内联样式吗？ */
+.u-bar {
+  font-size: 18px !important;
+  color: #fff;
+  /* 这里的block 是有什么效果呢？*/
+  display: block;
+  cursor: pointer;
+}
+/*-----------------响应式系统-----------------------*/
